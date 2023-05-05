@@ -1,6 +1,6 @@
 site_name: Hongliang CS Document
-repo_name: qiuhong-1202/CSDocument
-repo_url: https://github.com/qiuhong-1202/CSDocument
+repo_name: qiuhong-1202/CS-Docs
+repo_url: https://github.com/qiuhong-1202/CS-Document
 theme:
   name: material
   features:
