@@ -1,0 +1,79 @@
+## General
+# Ignore MS Office tempory files
+~$*
+
+# ignore macos system page files
+.DS_Store
+
+# ignore idea config files
+/.idea/
+
+# ignore target files
+/target/
+
+# ignore log files
+/log/
+
+# Visual Studio user specific files
+.vs/
+
+## Java
+# Ignore .class files
+*.class
+
+# ignore application.properties (prevent database password different)
+src/main/resources/application.properties
+
+# Mkdocs: ignore site dir for mkdocs deploy
+/site/
+
+## Git LFS
+# Using git lfs track "*.xxx" to track binary files
+# First download git lfs from https://git-lfs.com/
+# template: git lfs track "*."
+
+# Office files
+git lfs track "*.doc"
+git lfs track "*.docx"
+git lfs track "*.ppt"
+git lfs track "*.pptx"
+git lfs track "*.xls"
+git lfs track "*.xlsx"
+git lfs track "*.pdf"
+
+# compress files
+git lfs track "*.rar"
+git lfs track "*.zip"
+git lfs track "*.7z"
+
+# binary files
+git lfs track "*.exe"
+git lfs track "*.msi"
+
+# image files
+git lfs track "*.png"
+git lfs track "*.jpg"
+git lfs track "*.jpeg"
+git lfs track "*.bmp"
+git lfs track "*.tiff"
+git lfs track "*.gif"
+git lfs track "*.webp"
+
+# video files
+git lfs track "*.mp4"
+git lfs track "*.avi"
+git lfs track "*.rmvb"
+git lfs track "*.mov"
+git lfs track "*.mkv"
+
+# audio files
+git lfs track "*.mp3"
+git lfs track "*.m4a"
+git lfs track "*.wav"
+git lfs track "*.flac"
+
+# font files
+git lfs track "*.ttf"
+git lfs track "*.woff2"
+git lfs track "*.otf"
+
