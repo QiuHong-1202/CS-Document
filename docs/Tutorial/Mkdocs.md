@@ -23,6 +23,12 @@ pip install mkdocs
 
 - [Install Guide](https://www.mkdocs.org/user-guide/installation/)
 
+## 安装 material 主题
+
+```
+pip install mkdocs-material
+```
+
 ## 常用命令
 
 - 在 mkdocs 命令前要加入 `python -m`
