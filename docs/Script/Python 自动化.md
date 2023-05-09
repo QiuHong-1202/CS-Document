@@ -14,7 +14,7 @@ csv_name = './1902.csv'
 csv_reader = csv.reader(open(csv_name))
 
 for line in csv_reader:
-    folder_name = line[0] + "_" + line[1] + "_" + line[2] # we'b'h
+    folder_name = line[0] + "_" + line[1] + "_" + line[2] # 文件夹创建规则
     res_path = base_path + folder_name
     if not os.path.exists(res_path):
         os.mkdir(res_path)  # 创建文件夹，格式是路径+文件夹名称
