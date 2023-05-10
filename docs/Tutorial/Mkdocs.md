@@ -12,25 +12,25 @@
 
 - 创建 conda 虚拟环境
 
-```sh
+```bash
 conda create --name mkdocs python=3.9
 ```
 
 - 安装 `pip`
 
-```sh
+```bash
 conda install pip
 ```
 
 - 安装 `mkdocs`
 
-```sh
+```bash
 pip install mkdocs
 ```
 
 ## 安装 material 主题
 
-```sh
+```bash
 pip install mkdocs-material
 ```
 
@@ -40,7 +40,7 @@ pip install mkdocs-material
 
 ### 创建项目
 
-```sh
+```bash
 mkdocs new my-project
 cd my-project
 ```
@@ -49,13 +49,13 @@ cd my-project
 
 - 切换到 Doc 目录下
 
-```shell
+```bash
 cd D:/Projects/Site/CS-Document
 ```
 
 - 启动测试服务
 
-```sh
+```bash
 python -m mkdocs serve
 ```
 
@@ -72,25 +72,25 @@ qiuhong-1202.github.io/
 
 - 激活 `mkdocs` 虚拟环境
 
-```shell
+```bash
 conda activate mkdocs
 ```
 
 - 转到 Doc 目录编写文档
 
-```shell
+```bash
 cd D:/Projects/Site/CS-Document
 ```
 
 - 转到 Pages 仓库目录下
 
-```sh
+```bash
 cd ../qiuhong-1202.github.io/
 ```
 
 - 部署到 Github Pages
 
-```sh
+```bash
 python -m mkdocs gh-deploy --config-file ../CS-Document/mkdocs.yml --remote-branch main
 ```
 
