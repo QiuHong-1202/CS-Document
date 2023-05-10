@@ -3,6 +3,7 @@
 ## Git Getting Start
 
 - [Git Site](https://git-scm.com/)
+- [A Visual Git Reference](https://marklodato.github.io/visual-git-guide/index-zh-cn.html)
 - [Download Git](https://git-scm.com/downloads)
 - [Download GitHub Desktop](https://desktop.github.com/)
 

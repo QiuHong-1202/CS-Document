@@ -1,13 +1,20 @@
 # Mkdocs
 
-## Useful Links
+## Document
 
 - [Mkdocs Official Document](https://www.mkdocs.org/getting-started/)
 - [Mkdocs-material Document](https://squidfunk.github.io/mkdocs-material/)
+- [Installation Guide](https://www.mkdocs.org/user-guide/installation/)
 
 ## 安装 Mkdocs
 
 > 在 conda 虚拟环境中安装
+
+- 创建 conda 虚拟环境
+
+```sh
+conda create --name mkdocs python=3.9
+```
 
 - 安装 `pip`
 
@@ -20,8 +27,6 @@ conda install pip
 ```sh
 pip install mkdocs
 ```
-
-- [Install Guide](https://www.mkdocs.org/user-guide/installation/)
 
 ## 安装 material 主题
 
@@ -42,8 +47,16 @@ cd my-project
 
 ### 测试项目
 
+- 切换到 Doc 目录下
+
+```shell
+cd D:/Projects/Site/CS-Document
+```
+
+- 启动测试服务
+
 ```sh
-mkdocs serve
+python -m mkdocs serve
 ```
 
 ## 部署文档
@@ -57,10 +70,16 @@ CS-Doucment/
 qiuhong-1202.github.io/
 ```
 
-- 转到 Site 目录
+- 激活 `mkdocs` 虚拟环境
 
 ```shell
-cd D:\Projects\Site
+conda activate mkdocs
+```
+
+- 转到 Doc 目录编写文档
+
+```shell
+cd D:/Projects/Site/CS-Document
 ```
 
 - 转到 Pages 仓库目录下

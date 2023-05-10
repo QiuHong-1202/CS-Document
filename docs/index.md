@@ -5,4 +5,7 @@ home: true
 statistics: true
 ---
 
-This is the homepage of Hongliang
+## Quick Links
+
+- [My GitHub Profile](https://github.com/QiuHong-1202)
+- [LaTeX Syntax](https://qiuhong-1202.github.io/Tutorial/LaTeX/)
