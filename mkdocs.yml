@@ -10,7 +10,6 @@ theme:
     - navigation.indexes
     - navigation.top
     - content.code.copy
-    - content.code.select
   custom_dir: overrides
   icon:
     repo: fontawesome/brands/git-alt
@@ -53,6 +52,11 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
       smart_dollar: false
@@ -62,6 +66,9 @@ markdown_extensions:
 
 plugins:
   - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
 
 extra_javascript:
   # - javascripts/config.js
