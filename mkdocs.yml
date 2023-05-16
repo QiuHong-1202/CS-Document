@@ -9,6 +9,7 @@ theme:
     - navigation.tracking 
     - navigation.indexes
     - navigation.top
+    - navigation.expand
     - content.code.copy
   custom_dir: overrides
   icon:
@@ -19,7 +20,7 @@ theme:
   favicon: images/snowman-circle.png
   font:
     code: JetBrains Mono
-    text: JetBrains Mono
+    text: Noto Sans SC
 
 markdown_extensions:
   - toc:
@@ -78,3 +79,4 @@ extra_javascript:
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css
+  - stylesheets/extra.css
