@@ -16,10 +16,10 @@ conda --version
 conda info
 ```
 
-- 更新 conda 至最新版本
+- 更新 conda 至最新版本（为所有用户安装的版本需要管理员权限）
 
 ```bash
-conda update conda
+conda update -n base -c defaults conda
 ```
 
 - 查看 conda 帮助信息

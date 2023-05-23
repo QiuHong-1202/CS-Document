@@ -94,6 +94,15 @@ cd ../qiuhong-1202.github.io/
 python -m mkdocs gh-deploy --config-file ../CS-Document/mkdocs.yml --remote-branch main
 ```
 
+## Debug
+
+- `"git-revision-date-localized"` plugin is not installed
+  - 安装下列包即可
+
+```
+pip install mkdocs-git-revision-date-localized-plugin
+```
+
 ## 参考
 
 - [TonyCrane's Notebook Repo](https://github.com/TonyCrane/note)
