@@ -61,6 +61,8 @@ P.S. 如无特殊说明下面的关系符的否定形式都为肯定形式的源
 |    \omega    |   $\omega$    |
 | \varepsilon  | $\varepsilon$ |
 |    \sigma    |   $\sigma$    |
+|     \eta     |    $\eta$     |
+|     \ell     |    $\ell$     |
 
 ### 大写字母
 
