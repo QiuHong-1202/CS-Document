@@ -127,9 +127,9 @@ $$
 
 
 $$
-\frac{1}{n}(y-Xw)^TX=0\\
-y^TX-(w^TX^T)X=0\\
-w^T=y^TX(X^TX)^{-1}\\
+\frac{1}{n}(y-Xw)^TX=0 &\\
+y^TX-(w^TX^T)X=0 &\\
+w^T=y^TX(X^TX)^{-1} &\\
 $$
 
 
@@ -175,3 +175,132 @@ $$
 $$
 \frac{1}{b}\sum_{i\in I_b}\ell(x_i,y_i,w)
 $$
+
+## 模型选择
+
+- 训练误差：模型在训练数据上的误差
+- 泛化误差：模型在新数据上的误差
+- 验证数据集：评估模型好坏的数据集
+  - 验证数据集可以用来调整超参数
+  - 很多时候为了方便在代码中直接都叫 `test_data` 但实际上它是验证数据集
+- 测试数据集：只用一次的数据集
+  - 未来的考试
+  - 出价房子的实际成交价
+- $K$ 则交叉验证：在训练数据没有那么多的时候，使用它的平均误差判断超参数的好坏
+
+## 过拟合和欠拟合
+
+- 模型容量：拟合各种函数的能力
+  - 低容量的模型难以拟合训练数据
+  - 高容量的模型可以记住所有的训练数据		
+- 估计模型容量
+  - 难以在不同种类的算法之间比较
+  - 模型容量要匹配训练复杂度
+  - 给定一个模型种类，将有两个主要因素
+    - 参数的个数
+    - 参数值的选择范围
+
+### 权重衰退 Weight Decay
+
+#### 使用均方范数作为硬性限制
+
+- 通过限制参数值的选择范围来控制模型容量 
+
+
+$$
+\min \ell(\mathbf{w}, b)\text{ subject to }\|\mathbf{w}\|^2 \leq \theta
+$$
+
+
+- 其中 $\ell$ 为损失函数，$\mathbf{w}, b$ 为参数，在最小化 loss 的时候加入一个限制，使得权重 $\mathbf{w}$ 的 $L_2$ norm 小于 $\theta$ 
+- 通常不限制偏移 $b$ （但是限不限制都差不多）
+- 小的 $\theta$ 意味着更强的正则项（对 $\mathbf{w}$ 值的限制强）
+
+#### 使用均方范数作为柔性限制
+
+- 对每个 $\theta$, 都可以找到 $\lambda$ 使得之前的目标函数（使用均方范数作为硬性限制）等价于下面的公式
+  - 可以通过拉格朗日乘子来证明
+  - 后面的项可以被成为惩罚项 (penalty)
+
+
+$$
+\min \ell(\mathbf{w}, b)+\frac{\lambda}{2}\|\mathbf{w}\|^2
+$$
+
+
+- 超参数 $\lambda$ 控制了正则项的重要程度
+  - $\lambda=0$ ：无作用
+  - $\lambda \rightarrow \infty, \mathbf{w}^* \rightarrow \mathbf{0}$
+
+#### 参数更新法则
+
+- 计算梯度
+
+
+$$
+\frac{\partial}{\partial \mathbf{w}}\left(\ell(\mathbf{w}, b)+\frac{\lambda}{2}\|\mathbf{w}\|^2\right)=\frac{\partial \ell(\mathbf{w}, b)}{\partial \mathbf{w}}+\lambda \mathbf{w}
+$$
+
+
+- 时间 $t$ 更新参数
+
+$$
+\begin{aligned}
+ \mathbf{w}_{t+1} &= \mathbf{w}_{t+1} + \eta\frac{\partial}{\partial \mathbf{w}_t}(\ell(\mathbf{w}, b)+\frac{\lambda}{2}\|\mathbf{w}\|^2) &\\
+ &=(1-\eta \lambda) \mathbf{w}_t-\eta \frac{\partial \ell\left(\mathbf{w}_t, b_t\right)}{\partial \mathbf{w}_t}&\\
+\end{aligned}
+$$
+
+
+- 通常 $\eta \lambda<1$, 在深度学习中通常叫做权重衰退
+- 权重衰退通过 $L_2$ 正则项使得模型参数不会过大，从而控制模型复杂度
+- 正则项权重是控制模型复杂度的超参数
+
+### 丢弃法
+
+#### 动机
+
+- 一个好的模型需要对输入的数据的扰动健壮
+- 使用有噪音的数据等价于 Tikhonov 正则（随机噪音可以防止过拟合）
+- 丢弃法：在层之间加入噪音
+  - 将一些输出项随机置为 $0$ 来控制模型的复杂度
+  - 丢弃概率是控制模型复杂度的超参数
+
+####  无偏差的加入噪音
+
+- 对 $x$ 加入噪音得到 $x'$ ，我们希望
+
+
+$$
+E(x')=x
+$$
+
+
+- 丢弃法对每个元素进行如下扰动
+
+
+$$
+x_i^{\prime}= \begin{cases}0 & \text { with probablity } p \\ \frac{x_i}{1-p} & \text { otherise }\end{cases}
+$$
+
+### 
+
+#### 使用丢弃法
+
+- 训练时的丢弃法：通常将丢弃法用在训练时隐藏全连接层的输出上
+- 常作用在 MLP 的隐藏层输出上
+
+
+$$
+\begin{aligned}
+\mathbf{h} & =\sigma\left(\mathbf{W}_1 \mathbf{x}+\mathbf{b}_1\right) \\
+\mathbf{h}^{\prime} & =\operatorname{dropout}(\mathbf{h}) \\
+\mathbf{o} & =\mathbf{W}_2 \mathbf{h}^{\prime}+\mathbf{b}_2 \\
+\mathbf{y} & =\operatorname{softmax}(\mathbf{o})
+\end{aligned}
+$$
+
+
+![image-20230530143326431](F:\Project\Site\CS-Document\docs\Tutorial\Deep Learning\assets\image-20230530143326431.png)
+
+- 推理中的丢弃法：直接返回输入，等价于不使用 dropout
