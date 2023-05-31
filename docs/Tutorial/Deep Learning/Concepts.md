@@ -127,9 +127,9 @@ $$
 
 
 $$
-\frac{1}{n}(y-Xw)^TX=0 &\\
-y^TX-(w^TX^T)X=0 &\\
-w^T=y^TX(X^TX)^{-1} &\\
+\frac{1}{n}(y-Xw)^TX=0\\
+y^TX-(w^TX^T)X=0 \\
+w^T=y^TX(X^TX)^{-1} \\
 $$
 
 
@@ -301,6 +301,6 @@ $$
 $$
 
 
-![image-20230530143326431](F:\Project\Site\CS-Document\docs\Tutorial\Deep Learning\assets\image-20230530143326431.png)
+![image-20230530143326431](./assets/image-20230530143326431.png)
 
 - 推理中的丢弃法：直接返回输入，等价于不使用 dropout
