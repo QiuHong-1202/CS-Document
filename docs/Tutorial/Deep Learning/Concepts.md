@@ -127,9 +127,9 @@ $$
 
 
 $$
-\frac{1}{n}(y-Xw)^TX=0\\
+\displaylines{\frac{1}{n}(y-Xw)^TX=0\\
 y^TX-(w^TX^T)X=0 \\
-w^T=y^TX(X^TX)^{-1} \\
+w^T=y^TX(X^TX)^{-1} \\}
 $$
 
 
@@ -283,7 +283,7 @@ $$
 x_i^{\prime}= \begin{cases}0 & \text { with probablity } p \\ \frac{x_i}{1-p} & \text { otherise }\end{cases}
 $$
 
-### 
+
 
 #### 使用丢弃法
 
@@ -304,3 +304,75 @@ $$
 ![image-20230530143326431](./assets/image-20230530143326431.png)
 
 - 推理中的丢弃法：直接返回输入，等价于不使用 dropout
+
+## 数值稳定性
+
+### 网络的梯度
+
+- 考虑如下的 $d$ 层神经网络
+
+
+$$
+h^t = f_t(h^{t-1}) \quad \text{and} \quad y=\ell \circ f_d \circ \ldots \circ f_1(\mathbf{x})
+$$
+
+
+- 计算损失 $\ell$ 关于参数 $\textbf{W}_t$ 的梯度，根据链式法则有
+  - 所有的中间项都是向量对向量求导，得到的结果是矩阵，在这个过程中，需要做大量的矩阵乘法
+  - 这就带来了两个常见的数值稳定性问题：梯度爆炸和梯度消失
+
+
+$$
+\frac{\partial \ell}{\partial \mathbf{W}^t}=\frac{\partial \ell}{\partial \mathbf{h}^d} \frac{\partial \mathbf{h}^d}{\partial \mathbf{h}^{d-1}} \ldots \frac{\partial \mathbf{h}^{t+1}}{\partial \mathbf{h}^t} \frac{\partial \mathbf{h}^t}{\partial \mathbf{W}^t}
+$$
+
+#### MLP 的例子
+
+对于 MLP （省略偏置项）
+
+- $f_t\left(\mathbf{h}^{t-1}\right)=\sigma\left(\mathbf{W}^t \mathbf{h}^{t-1}\right) \quad$ $\sigma$  是激活函数
+- $\frac{\partial \mathbf{h}^t}{\partial \mathbf{h}^{t-1}}=\operatorname{diag}\left(\sigma^{\prime}\left(\mathbf{W}^t \mathbf{h}^{t-1}\right)\right)\left(W^t\right)^T \quad \sigma^{\prime}$ 是 $\sigma$ 的导数函数
+
+
+
+所以有
+
+
+$$
+\begin{equation}
+\prod_{i=t}^{d-1} \frac{\partial \mathbf{h}^{i+1}}{\partial \mathbf{h}^i}=\prod_{i=t}^{d-1} \operatorname{diag}\left(\sigma^{\prime}\left(\mathbf{W}^i \mathbf{h}^{i-1}\right)\right)\left(W^i\right)^T
+\end{equation}
+$$
+
+#### 梯度爆炸
+
+- 如果使用 ReLU 作为上式的激活函数，有
+
+
+$$
+\sigma(x)=\max (0, x) \quad \text { and } \quad \sigma^{\prime}(x)=\left\{\begin{array}{lc}
+1 & \text { if } x>0 \\
+0 & \text { otherwise }
+\end{array}\right.
+$$
+
+
+$\prod_{i=t}^{d-1} \frac{\partial \mathbf{h}^{i+1}}{\partial \mathbf{h}^i}=\prod_{i=t}^{d-1} \operatorname{diag}\left(\sigma^{\prime}\left(\mathbf{W}^i \mathbf{h}^{i-1}\right)\right)\left(W^i\right)^T$ 中的一些元素会来自于 $\prod_{i=t}^{d-1}\left(W^i\right)^T$ ，如果 $d-t$ 很大，值将会很大
+
+
+
+梯度爆炸带来的问题
+
+- 梯度超值域：常用的 16bit 精度的浮点数范围仅在（ $6\mathbf{e}^{-5} \sim 6\mathbf{e}^4$ ）之间
+- 模型对学习率敏感，在梯度很大时
+  - $\text{learning rate} \uparrow \quad \longrightarrow\quad w \uparrow \quad \longrightarrow \quad \nabla \uparrow$
+  - $\text{learning rate} \downarrow \quad \longrightarrow \quad \text{训练无进展}$
+
+### 权重初始化
+
+- 在合理值区间里随机初始参数
+- 训练开始的时候更容易有数值不稳定
+  - 远离最优解的地方损失函数表面可能 很复杂
+  - 最优解附近表面会比较平
+- 使用 $\mathcal{N}(0,0.01)$ 来初始可能对小网络没问题, 但不能保证深度神经网络
+
