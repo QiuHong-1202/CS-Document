@@ -103,7 +103,7 @@ python -m mkdocs gh-deploy --config-file ../CS-Document/mkdocs.yml --remote-bran
 
 - 无序标题不支持多层嵌套：需要安装额外插件并启用
 
-  - `pip install mkdocs-pandoc-plugin`
+  - `pip install mdx_truly_sane_lists`
   
   - 在 `mkdoc.yml` 的 `markdown_extensions` 添加 `mdx_truly_sane_lists` 
 
