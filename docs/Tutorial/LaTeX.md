@@ -55,34 +55,38 @@ P.S. 如无特殊说明下面的关系符的否定形式都为肯定形式的源
 
 ## 希腊字母
 
-### 小写字母
-
-|   渲染前    |    渲染后     |
-| :---------: | :-----------: |
-|   \alpha    |   $\alpha$    |
-|    \beta    |    $\beta$    |
-|   \gamma    |   $\gamma$    |
-|   \theta    |   $\theta$    |
-|   \lambda   |   $\lambda$   |
-|     \mu     |     $\mu$     |
-|     \xi     |     $\xi$     |
-|    \rho     |    $\rho$     |
-|   \varphi   |   $\varphi$   |
-|   \omega    |   $\omega$    |
-| \varepsilon | $\varepsilon$ |
-|   \sigma    |   $\sigma$    |
-|    \eta     |    $\eta$     |
-|    \ell     |    $\ell$     |
-
-### 大写字母
-
-将小写形式源码的第一个字符大写
-
-| 渲染前 |  渲染后  |
-| :----: | :------: |
-| \Sigma | $\Sigma$ |
-|  \Pi   |  $\Pi$   |
-| \Delta | $\Delta$ |
+| 字母          | 实现        | 字母       | 实现     |
+| ------------- | ----------- | ---------- | -------- |
+| $\alpha$      | \alpha      | $\Alpha$   | \Alpha   |
+| $\beta$       | \beta       | $\Beta$    | \Beta    |
+| $\gamma$      | \gamma      | $\Gamma$   | \Gamma   |
+| $\delta$      | \delta      | $\Delta$   | \Delta   |
+| $\epsilon$    | \epsilon    | $\Epsilon$ | \Epsilon |
+| $\varepsilon$ | \varepsilon |            |          |
+| $\zeta$       | \zeta       | $\Zeta$    | \Zeta    |
+| $\eta$        | \eta        | $\Eta$     | \Eta     |
+| $\theta$      | \theta      | $\Theta$   | \Theta   |
+| $\vartheta$   | \vartheta   |            |          |
+| $\iota$       | \iota       | $\Iota$    | \Iota    |
+| $\kappa$      | \kappa      | $\Kappa$   | \Kappa   |
+| $\lambda$     | \lambda     | $\Lambda$  | \Lambda  |
+| $\mu$         | \mu         | $\Mu$      | \Mu      |
+| $\nu$         | \nu         | $\Nu$      | \Nu      |
+| $\xi$         | \xi         | $\Xi$      | \Xi      |
+| $\omicron$    | \omicron    | $\Omicron$ | \Omicron |
+| $\pi$         | \pi         | $\Pi$      | \Pi      |
+| $\varpi$      | \varpi      |            |          |
+| $\rho$        | \rho        | $\Rho$     | \Rho     |
+| $\varrho$     | \varrho     |            |          |
+| $\sigma$      | \sigma      | $\Sigma$   | \Sigma   |
+| $\varsigma$   | \varsigma   |            |          |
+| $\tau$        | \tau        | $\Tau$     | \Tau     |
+| $\upsilon$    | \upsilon    | $\Upsilon$ | \Upsilon |
+| $\phi$        | \phi        | $\Phi$     | \Phi     |
+| $\varphi$     | \varphi     |            |          |
+| $\chi$        | \chi        | $\Chi$     | \Chi     |
+| $\psi$        | \psi        | $\Psi$     | \Psi     |
+| $\omega$      | \omega      | $\Omega$   | \Omega   |
 
 ## 格式符号
 
@@ -405,3 +409,7 @@ y=x+1 & x<0\\
 y=x-1 & x>0\\
 \end{array}
 $$
+
+## 更多符号
+
+- [Latex 数学符号对应表](https://www.cnblogs.com/dingdangsunny/p/12312966.html)
