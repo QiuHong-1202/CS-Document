@@ -256,9 +256,7 @@ $$
 - 权重衰退通过 $L_2$ 正则项使得模型参数不会过大，从而控制模型复杂度
 - 正则项权重是控制模型复杂度的超参数
 
-### 丢弃法
-
-#### 动机
+### 丢弃法 Dropout
 
 - 一个好的模型需要对输入的数据的扰动健壮
 - 使用有噪音的数据等价于 Tikhonov 正则（随机噪音可以防止过拟合）
@@ -368,6 +366,8 @@ $\prod_{i=t}^{d-1} \frac{\partial \mathbf{h}^{i+1}}{\partial \mathbf{h}^i}=\prod
   - $\text{learning rate} \uparrow \quad \longrightarrow\quad w \uparrow \quad \longrightarrow \quad \nabla \uparrow$
   - $\text{learning rate} \downarrow \quad \longrightarrow \quad \text{训练无进展}$
 
+#### 梯度消失
+
 ### 权重初始化
 
 - 在合理值区间里随机初始参数
@@ -376,3 +376,7 @@ $\prod_{i=t}^{d-1} \frac{\partial \mathbf{h}^{i+1}}{\partial \mathbf{h}^i}=\prod
   - 最优解附近表面会比较平
 - 使用 $\mathcal{N}(0,0.01)$ 来初始可能对小网络没问题, 但不能保证深度神经网络
 
+## Latent Space & Code
+
+- latent code: 为了更好的对数据进行分类或生成，需要对数据的特征进行表示，但是数据有很多特征，这些特征之间相互关联，耦合性较高，导致模型很难弄清楚它们之间的关联，使得学习效率低下，因此需要寻找到这些表面特征之下隐藏的深层次的关系，将这些关系进行解耦，得到的隐藏特征，即 latent code
+- latent space: 由 latent code 组成的空间
