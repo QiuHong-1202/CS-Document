@@ -176,6 +176,15 @@ $$
 \frac{1}{b}\sum_{i\in I_b}\ell(x_i,y_i,w)
 $$
 
+## 多层感知机 MLP
+
+- 也被称作 **前馈神经网络**（feedforward neural network）
+- [参考](https://zh.d2l.ai/chapter_multilayer-perceptrons/mlp.html)
+
+我们可以通过在网络中加入一个或多个隐藏层来克服线性模型的限制, 使其能处理更普遍的函数关系类型。要做到这一点，最简单的方法是将许多全连接层堆叠在一起。每一层都输出到上面的层，直到生成最后的输出。我们可以把前 $L-1$ 层看作表示，把最后一层看作线性预测器。这种 架构通常称为**多层感知机**（multilayer perceptron），通常缩写为 MLP。
+
+![../_images/mlp.svg](https://zh.d2l.ai/_images/mlp.svg)
+
 ## 模型选择
 
 - 训练误差：模型在训练数据上的误差
@@ -367,6 +376,19 @@ $\prod_{i=t}^{d-1} \frac{\partial \mathbf{h}^{i+1}}{\partial \mathbf{h}^i}=\prod
   - $\text{learning rate} \downarrow \quad \longrightarrow \quad \text{训练无进展}$
 
 #### 梯度消失
+
+- 如果使用 sigmoid 作为上式的激活函数，有
+
+
+$$
+\sigma(x) = \frac{1}{1+e^{-x}} \quad \sigma'(x)=\sigma(x)(1-\sigma(x)) 
+$$
+当输入的值很大时，梯度会很小
+
+梯度消失带来的问题
+
+- $\nabla \to 0 \quad \longrightarrow \quad \text{训练无进展}$
+- 底部的层梯度较小，无法让神经网络更深
 
 ### 权重初始化
 
