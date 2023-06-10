@@ -1,3 +1,5 @@
+# Concepts in Deep Learning
+
 ## 梯度
 
 我们可以连结一个多元函数对其所有变量的偏导数, 以得到该函数的梯度 (gradient) 向量。具体而言, 设函数 $f: \mathbb{R}^n \rightarrow \mathbb{R}$ 的输入是 $一$ 个 $n$ 维向量 $\mathbf{x}=\left[x_1, x_2, \ldots, x_n\right]^{\top}$, 并且输出是一个标量。函数 $f(\mathbf{x})$ 相对于 $\mathbf{x}$ 的梯度是一个包含 $n$ 个偏导数的向量:
@@ -402,3 +404,21 @@ $$
 
 - latent code: 为了更好的对数据进行分类或生成，需要对数据的特征进行表示，但是数据有很多特征，这些特征之间相互关联，耦合性较高，导致模型很难弄清楚它们之间的关联，使得学习效率低下，因此需要寻找到这些表面特征之下隐藏的深层次的关系，将这些关系进行解耦，得到的隐藏特征，即 latent code
 - latent space: 由 latent code 组成的空间
+
+## 前向和反向传播
+
+- 前向传播（forward propagation或 forward pass） 指的是：**按顺序（从输入层到输出层）计算和存储神经网络中每层的结果**
+
+- 反向传播（backward propagation或 backpropagation）指的是**计算神经网络参数梯度的方法**。简言之, 该方法根据微积分中的链式规则, 按相反 的顺序从输出层到输入层遍历网络。该算法存储了计算某些参数梯度时所需的任何中间变量（偏导数）。假设我们有函数 $Y=f(X)$ 和 $Z =g(Y)$ , 其中输入和输出 $X, Y, Z$ 是任意形状的张量。利用链式法则, 我们可以计算 $Z$ 关于 $X$ 的导数
+
+
+$$
+\frac{\partial {Z}}{\partial {X}}=\operatorname{prod}\left(\frac{\partial {Z}}{\partial {Y}}, \frac{\partial {Y}}{\partial {X}}\right)
+$$
+
+
+在这里，我们使用 $\operatorname{prod}$ 运算符在执行必要的操作（如换位和交换输入位置）后将其参数相乘。对于向量，这很简单，它只是矩阵-矩阵乘法。对于高维张量，我们使用适当的对应项。运算符 $\operatorname{prod}$ 指代了所有的这些符号。
+
+# Concept Links
+
+- [nn.Module 类与前向传播函数 forward 的理解](https://www.cnblogs.com/luckyplj/p/13378293.html)
