@@ -1,6 +1,5 @@
-- 切片
-  - 
-
+- [切片](https://zhuanlan.zhihu.com/p/79541418)
+  
 - [`*args` 和 `**kwargs`](https://zhuanlan.zhihu.com/p/50804195)
   - 给函数传递一个可变参数列表
   - `*args` 表示传递变量，最后得到的是 `tuple`
