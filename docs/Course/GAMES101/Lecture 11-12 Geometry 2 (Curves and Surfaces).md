@@ -44,16 +44,24 @@ e.g. 三个点的贝塞尔曲线的例子
 根据 $b_0^1$ 和 $b_1^1$ 得到 $b_0^2$，将其展开容易得到上式，容易发现是系数是 $(1-t +t)^2$ 的形式，所以我们容易推理出贝塞尔曲线的一般代数表示
 
 对于有 $n+1$ 个点的贝塞尔曲线，在任意时间 $t$，它都是给定的控制点的线性组合
+
+
 $$
 \mathbf{b}^n(t)=\mathbf{b}_0^n(t)=\sum_{j=0}^n \mathbf{b}_j B_j^n(t)
 $$
+
+
 其中，$B_j^n(t)$ 是 Bernstein polynomial，描述为【就是描述 $(1-t +t)^n$ 的各项系数是多少】
+
+
 $$
 B_i^n(t)=\left(\begin{array}{c}
 n \\
 i
 \end{array}\right) t^i(1-t)^{n-i}
 $$
+
+
 
 #### Features
 
@@ -120,27 +128,37 @@ Evaluating Surface Position For Parameters $(u,v)$
   - 下图中的**白色**顶点为生成的新的顶点且被两个原三角形共享，认为 $A,B$ 两点是距离白色点较近的两个点，$C,D$ 两点是距离白色点较远的两个点，实质是一种加权平均，使得新出现的白点可以达到平滑的效果
 
   - Loop Subdivision 算法将白色顶点的坐标调整为 
+    
+    
     $$
     \frac{3}{8}(A+B) + \frac{1}{8}(C+D)
     $$
 
+  
+
   ![image-20221014184805017](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210141848046.png)
+
+  
 
   - 对于旧的顶点（虚线表示拆出的新三角形，老的顶点是中间的**白色**点）
 
   - Loop Subdivision 算法使得调整后的新顶点，一部分相信老的顶点的平均值，一部分受新的顶点的影响
-
-  - 定义 $n$ 为白色顶点的度，下图中 $n=6$
-
-  - 定义 $u$ 为与 $n$ 有关系的一个数。当 $n=3$ 时，$u=\frac{3}{16}$，当 $n\ne 3$ 时，$u = \frac{3}{8n}$
-
-  - Loop Subdivision 算法将白色顶点的坐标调整为 （可以这么理解，如果一个顶点连了很多三角形，说明这个顶点可以由别人来决定，如果一个顶点连接的三角形数目很少，说明这个顶点自身比较重要，要更多的相信自己的信息）
-    $$
-    (1-un)\times \text{original\_position} + u\times\text{neighbor\_position\_sum}
-    $$
-
   
-
+  - 定义 $n$ 为白色顶点的度，下图中 $n=6$
+  
+  - 定义 $u$ 为与 $n$ 有关系的一个数。当 $n=3$ 时，$u=\frac{3}{16}$，当 $n\ne 3$ 时，$u = \frac{3}{8n}$
+  
+  - Loop Subdivision 算法将白色顶点的坐标调整为 （可以这么理解，如果一个顶点连了很多三角形，说明这个顶点可以由别人来决定，如果一个顶点连接的三角形数目很少，说明这个顶点自身比较重要，要更多的相信自己的信息）
+    
+    
+    $$
+    (1-un)\times \text{original-position} + u\times\text{neighbor-position-sum}
+    $$
+  
+  
+  
+  
+  
   ![image-20221014184824390](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210141848421.png)
 
 
@@ -169,24 +187,36 @@ Evaluating Surface Position For Parameters $(u,v)$
 1. 在一个面中心的新的点，设其为 $f$
 
 ![image-20221014191816627](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210141918659.png)
+
+
 $$
 f=\frac{v_1+v_2+v_3+v_4}{4}
 $$
 
 
+
+
 2. 在边中心的新的点，设其为 $e$
 
 ![image-20221014191831998](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210141918032.png)
+
+
 $$
 e=\frac{v_1+v_2+f_1+f_2}{4}
 $$
 
+
+
 3. 老的点，设其为 $v$，定义 $p$ 为老的点，$m$ 为边的中点
 
 ![image-20221014192023362](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210141920388.png)
+
+
 $$
 v=\frac{f_1+f_2+f_3+f_4+2\left(m_1+m_2+m_3+m_4\right)+4 p}{16}
 $$
+
+
 
 ### Mesh Simplification 
 

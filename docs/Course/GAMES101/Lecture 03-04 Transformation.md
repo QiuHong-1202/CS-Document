@@ -1,4 +1,4 @@
-# Transformation
+# Lecture 03-04 Transformation
 
 ## 2D 线性变换
 
@@ -7,6 +7,8 @@
 > 可以说，Linear Transformation = Matrices (of the same dimension)
 
 我们将如下所示的简单矩阵乘法定义为对向量 $(x, y)^{T}$ 的线性变换。
+
+
 $$
 \left[\begin{array}{ll}
 a_{11} & a_{12} \\
@@ -20,23 +22,33 @@ a_{21} x+a_{22} y
 \end{array}\right]
 $$
 
+
+
 #### 缩放 (scale)
 
 缩放变换是一种沿着坐标轴作用的变换，定义如下:
+
+
 $$
 \operatorname{scale}\left(s_{x}, s_{y}\right)=\left[\begin{array}{cc}
 s_{x} & 0 \\
 0 & s_{y}
 \end{array}\right]
 $$
+
+
 即除了 $(0,0)^{T}$ 保持不变之外，所有的点变为 $\left(s_{x} x, s_{y} y\right)^{T}$
 
 #### 剪切 (shearing)
 
 shear 变换直观理解就是把物体一边固定，然后拉另外一边，定义如下:
+
+
 $$
 shear-x(s)=\left[\begin{array}{ll}1 & s \\ 0 & 1\end{array}\right], \\shear-y (s)=\left[\begin{array}{ll}1 & 0 \\ s & 1\end{array}\right]
 $$
+
+
 
 - 拉向 $x$ 轴
 
@@ -50,12 +62,14 @@ $$
 
 - 在无特殊说明的情况下，默认关于 $(0,0)$ 点，逆时针方向旋转 $\theta$ 角度（弧度）的公式如下
 
+
 $$
 \mathbf{R}_{\theta}=\left[\begin{array}{cc}
 \cos \theta & -\sin \theta \\
 \sin \theta & \cos \theta
 \end{array}\right]
 $$
+
 
 > 推导如下
 >
@@ -82,6 +96,8 @@ $$
 - point + point = 两个点的中点
 
 此外，当第三维为 $w(w\ne 0)$时，定义 
+
+
 $$
 \left(\begin{array}{c}
 x \\
@@ -94,6 +110,8 @@ y / w \\
 \end{array}\right), w \neq 0
 $$
 
+
+
 ## 仿射变换
 
 - 仿射变换使用一个矩阵统一了所有操作
@@ -105,6 +123,7 @@ $$
 
 #### Scale
 
+
 $$
 \mathbf{S}\left(s_{x}, s_{y}\right)=\left(\begin{array}{ccc}
 s_{x} & 0 & 0 \\
@@ -112,7 +131,10 @@ s_{x} & 0 & 0 \\
 0 & 0 & 1
 \end{array}\right)
 $$
+
+
 #### Rotation
+
 
 $$
 \mathbf{R}(\alpha)=\left(\begin{array}{ccc}
@@ -121,7 +143,10 @@ $$
 0 & 0 & 1
 \end{array}\right)
 $$
+
+
 #### Translation
+
 
 $$
 \mathbf{T}\left(t_{x}, t_{y}\right)=\left(\begin{array}{ccc}
@@ -130,6 +155,8 @@ $$
 0 & 0 & 1
 \end{array}\right)
 $$
+
+
 
 ## 逆变换
 
@@ -158,6 +185,8 @@ $$
 - 先应用线性变换再应用平移变换
 
 Use $4 \times 4$ matrices for affine transformations
+
+
 $$
 \left(\begin{array}{l}
 x^{\prime} \\
@@ -177,7 +206,10 @@ z \\
 \end{array}\right)
 $$
 
+
+
 ### Scale
+
 
 $$
 \mathbf{S}\left(s_{x}, s_{y}, s_{z}\right)=\left(\begin{array}{cccc}
@@ -187,7 +219,10 @@ s_{x} & 0 & 0 & 0 \\
 0 & 0 & 0 & 1
 \end{array}\right)
 $$
+
+
 ### Translation
+
 
 $$
 \mathbf{T}\left(t_{x}, t_{y}, t_{z}\right)=\left(\begin{array}{cccc}
@@ -198,6 +233,8 @@ $$
 \end{array}\right)
 $$
 
+
+
 ### ? Rotation 
 
 - around $x-, y-$, or $z$-axis
@@ -205,6 +242,8 @@ $$
 - $\sin \alpha$ 的正负号由右手定则确定，顺序是 $x\to z$
 
   <img src="https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208071716113.png" alt="image-20220807171648045" style="zoom:25%;" />
+  
+  
 
 $$
 \begin{aligned}
@@ -229,6 +268,8 @@ $$
 \end{aligned}
 $$
 
+
+
 - 所有的 3D 变换都可以被描述为在 $x,y,z$ 轴上的旋转
   - 也叫欧拉角
   - Often used in flight simulators: roll, pitch, yaw
@@ -242,6 +283,8 @@ $$
 ### Rodrigues’ Rotation Formula
 
 Rotation by angle $\alpha$ around axis $n$
+
+
 $$
 \mathbf{R}(\mathbf{n}, \alpha)=\cos (\alpha) \mathbf{I}+(1-\cos (\alpha)) \mathbf{n} \mathbf{n}^{T}+\sin (\alpha) \underbrace{\left(\begin{array}{ccc}
 0 & -n_{z} & n_{y} \\
@@ -249,6 +292,8 @@ n_{z} & 0 & -n_{x} \\
 -n_{y} & n_{x} & 0
 \end{array}\right)}_{\mathbf{N}}
 $$
+
+
 
 ## View / Camera Transformation
 
@@ -278,6 +323,8 @@ Think about how to take a photo
 #### 正则投影的变换矩阵
 
 Translate (center to origin) **first**, then scale (length/width/height to **2**)
+
+
 $$
 M_{\text {ortho }}=\left[\begin{array}{cccc}
 \frac{2}{r-l} & 0 & 0 & 0 \\
@@ -291,6 +338,8 @@ M_{\text {ortho }}=\left[\begin{array}{cccc}
 0 & 0 & 0 & 1
 \end{array}\right]
 $$
+
+
 
 ### Perspective projection
 
@@ -312,6 +361,7 @@ $$
 [计算机图形学二：视图变换(坐标系转化，正交投影，透视投影，视口变换)](https://zhuanlan.zhihu.com/p/144329075)
 
 #### 透视投影的变换矩阵
+
 
 $$
 \mathrm{M}_{\text {per }}=\mathrm{M}_{\text {ortho }} \mathrm{M}_{\text {persp } \rightarrow\text { ortho }}

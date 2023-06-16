@@ -1,4 +1,4 @@
-# Rasterization 1 (Triangles)
+# Lecture 05 Rasterization 1 (Triangles)
 
 ## 从规范立方体映射到屏幕
 
@@ -23,6 +23,7 @@
 
 - 视口变换矩阵
 
+
 $$
 M_{\text {viewport }}=\left(\begin{array}{cccc}
 \frac{w i d t h}{2} & 0 & 0 & \frac{\text { width }}{2} \\
@@ -31,6 +32,8 @@ M_{\text {viewport }}=\left(\begin{array}{cccc}
 0 & 0 & 0 & 1
 \end{array}\right)
 $$
+
+
 
 ## Triangles - Fundamental Shape Primitives
 

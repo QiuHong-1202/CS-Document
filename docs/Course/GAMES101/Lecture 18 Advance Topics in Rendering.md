@@ -1,4 +1,4 @@
-# Advanced Topics in Rendering
+# Lecture 18 Advance Topics in Rendering
 
 ## Advanced Light Transport
 
@@ -222,14 +222,21 @@
 #### Scattering Functions
 
 - BSSRDF: generalization of BRDF; exitant radiance at one point due to incident differential irradiance at another point:
+
+
 $$
 S\left(x_i, \omega_i, x_o, \omega_o\right)
 $$
+
+
 - Generalization of rendering equation: integrating over all points on the surface and all directions (!)
+
 
 $$
 L\left(x_o, \omega_o\right)=\int_A \int_{H^2} S\left(x_i, \omega_i, x_o, \omega_o\right) L_i\left(x_i, \omega_i\right) \cos \theta_i \mathrm{~d} \omega_i \mathrm{~d} A
 $$
+
+
 
 ![image-20221121164857212](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211648242.png)
 

@@ -1,4 +1,4 @@
-# Ray Tracing
+# Lecture 13-16 Ray Tracing
 
 ## Why Ray Tracing
 
@@ -66,10 +66,16 @@
 - Sphere:  $\mathbf{p}:(\mathbf{p}-\mathbf{c})^2-R^2=0$
 
 由于点需要满足两个方程，所以
+
+
 $$
 (\mathbf{o}+t \mathbf{d}-\mathbf{c})^2-R^2=0
 $$
+
+
 展开后也就有，
+
+
 $$
 \begin{aligned}
 &a t^2+b t+c=0, \text { where } \\
@@ -79,6 +85,8 @@ $$
 &t=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
 \end{aligned}
 $$
+
+
 注意，对于解出后的结果 $t$，需要满足 $t\ge 0$
 
 ### Ray Intersection With Implicit Surface
@@ -116,9 +124,12 @@ $$
 #### Ray Intersection With Plane
 
 - Ray equation:  $\mathbf{r}(t)=\mathbf{o}+t \mathbf{d}, 0 \leq t<\infty$
+
 - Plane equation: $\mathbf{p}:\left(\mathbf{p}-\mathbf{p}^{\prime}\right) \cdot \mathbf{N}=0$
 
 - Solve for intersection
+
+  
 
 $$
 \begin{aligned}
@@ -128,14 +139,20 @@ $$
 \end{aligned}
 $$
 
+
+
 - Check: $0 \leq t<\infty$，判断这个点是否在三角形内
 
 #### Möller Trumbore Algorithm
 
 A faster approach, giving barycentric coordinate **directly** （以另外一个形式描述平面）
+
+
 $$
 \overrightarrow{\mathbf{O}}+t \overrightarrow{\mathbf{D}}=\left(1-b_1-b_2\right) \overrightarrow{\mathbf{P}}_0+b_1 \overrightarrow{\mathbf{P}}_1+b_2 \overrightarrow{\mathbf{P}}_2
 $$
+
+
 
 - 联立光线和重心坐标
 - 使用克莱姆法则解这个线性方程组，解出 $b_1,b_2,t$
@@ -178,9 +195,13 @@ $$
   - $t_{exit}\ge0, t_{enter}<0$, The ray’s **origin is inside** the box — certainly **have intersection**
 
 In summary, Ray and AABB intersect iff
+
+
 $$
 t_{enter} < t_{exit}\ \text{and}\ t_{exit}\ge0
 $$
+
+
 
 ### Why Axis-Aligned
 
@@ -332,23 +353,35 @@ fun Intersect(Ray ray, BVH node) {
 
 - Radiant Energy: 光源辐射出来的能量 (Barely used in CG)
 
+
 $$
 Q[\mathrm{~J}=\text { Joule }]
 $$
 
+
+
 - Flux (Power): 光源辐射出的单位时间的能量，目的是分析和比较两个和多个能量（去除时间的影响）
+
   - lm = lumen (Flux 的单位，翻译是**流明**)
+
   - Flux 也可以理解为单位时间通过一个感光平面的光子数目
+
+    
 
 $$
 \Phi \equiv \frac{\mathrm{d} Q}{\mathrm{~d} t}[\mathrm{~W}=\mathrm{Watt}][\operatorname{lm}=\text { lumen }]^*
 $$
 
+
+
 ## Radiant Intensity
 
 - Radiant Intensity: The radiant (luminous) intensity is the power per unit **solid angle** (立体角) emitted by a point light source.
   - 可以理解为能量除以立体角
+  
   - 定义了光源在任何一个方向上的亮度
+  
+    
 
 $$
 \begin{gathered}
@@ -356,6 +389,8 @@ I(\omega) \equiv \frac{\mathrm{d} \Phi}{\mathrm{d} \omega} \\
 {\left[\frac{\mathrm{W}}{\mathrm{sr}}\right]\left[\frac{\operatorname{lm}}{\mathrm{sr}}=\mathrm{cd}=\text { candela }\right]}
 \end{gathered}
 $$
+
+
 
 ![image-20221110005225444](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211100052482.png)
 
@@ -388,24 +423,33 @@ $$
 - 对于一个均匀点光源，它的 Radiant Intensity 的相关计算是
 
   - 对于所有方向上的 Intensity 积分起来可以得到 Flux
+    
+    
     $$
     \begin{aligned}
     \Phi &=\int_{S^2} I \mathrm{~d} \omega \\
     &=4 \pi I
     \end{aligned}
     $$
-
+    
   - 对于任何一个方向上的 Intensity 有
-
+  
+    
+  
   $$
   I=\frac{\Phi}{4 \pi}
   $$
+
+
 
 ## Irradiance
 
 - The irradiance is the **power per unit area** incident on a surface point.
   - Intensity: **power per soild angle**
+  
   - 注意，面需要和入射光线垂直
+  
+    
 
 $$
 \begin{gathered}
@@ -413,6 +457,8 @@ E(\mathbf{x}) \equiv \frac{\mathrm{d} \Phi(\mathbf{x})}{\mathrm{d} A} \\
 {\left[\frac{\mathrm{W}}{\mathrm{m}^2}\right]\left[\frac{\operatorname{lm}}{\mathrm{m}^2}=\operatorname{lux}\right]}
 \end{gathered}
 $$
+
+
 
 ![image-20221110144321985](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211101443016.png)
 
@@ -424,9 +470,13 @@ Radiance is the fundamental field quantity that describes the  distribution of l
   - 考虑某一个确定的微小面和一个方向
 
 ![image-20221110150649434](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211101506469.png)
+
+
 $$
 L(\mathrm{p}, \omega) \equiv \frac{\mathrm{d}^2 \Phi(\mathrm{p}, \omega)}{\mathrm{d} \omega \mathrm{d} A \cos \theta}
 $$
+
+
 
 - **Recall**
   - Irradiance: power per projected unit area
@@ -444,8 +494,11 @@ $$
 
 - Irradiance: total power received by area dA 
   - 某一个小区域内接收到的所以能量
+  
 - Radiance: power received by area dA from “direction” dω
   - 某一个小区域的某一个方向上接受到的能量
+  
+    
 
 $$
 \begin{aligned}
@@ -453,6 +506,8 @@ d E(\mathrm{p}, \omega) &=L_i(\mathrm{p}, \omega) \cos \theta \mathrm{d} \omega 
 E(\mathrm{p}) &=\int_{H^2} L_i(\mathrm{p}, \omega) \cos \theta \mathrm{d} \omega
 \end{aligned}
 $$
+
+
 
 ![image-20221110151545266](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211101515315.png)
 
@@ -477,9 +532,15 @@ The Bidirectional Reflectance Distribution Function (BRDF)  represents **how muc
 BRDF 描述了光线和物体是如何作用的
 
 ![image-20221110152234103](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211101522141.png)
+
+
 $$
 f_r\left(\omega_i \rightarrow \omega_r\right)=\frac{\mathrm{d} L_r\left(\omega_r\right)}{\mathrm{d} E_i\left(\omega_i\right)}=\frac{\mathrm{d} L_r\left(\omega_r\right)}{L_i\left(\omega_i\right) \cos \theta_i \mathrm{~d} \omega_i} \quad\left[\frac{1}{\mathrm{sr}}\right]
 $$
+
+
+
+
 
 ## The Reflection Equation
 
@@ -487,9 +548,12 @@ $$
 
 - Reflection Equation 描述了任何一个着色点在各种不同光照环境下对出射光线的贡献
 
+
 $$
 L_r\left(\mathrm{p}, \omega_r\right)=\int_{H^2} f_r\left(\mathrm{p}, \omega_i \rightarrow \omega_r\right) L_i\left(\mathrm{p}, \omega_i\right) \cos \theta_i \mathrm{~d} \omega_i
 $$
+
+
 
 ### Challenge: Recursive Equation
 
@@ -498,13 +562,21 @@ $$
 ## The Rendering Equation
 
 Re-write the reflection equation:
+
+
 $$
 L_r\left(\mathrm{p}, \omega_r\right)=\int_{H^2} f_r\left(\mathrm{p}, \omega_i \rightarrow \omega_r\right) L_i\left(\mathrm{p}, \omega_i\right) \cos \theta_i \mathrm{~d} \omega_i
 $$
+
+
 by adding an Emission term to make it general（考虑物体会发光的情况），这样就得到了 Rendering Equation 
+
+
 $$
 L_o\left(p, \omega_o\right)=L_e\left(p, \omega_o\right)+\int_{\Omega^{+}} L_i\left(p, \omega_i\right) f_r\left(p, \omega_i, \omega_o\right)\left(n \cdot \omega_i\right) \mathrm{d} \omega_i
 $$
+
+
 Note: now, we assume that all directions are pointing outwards!
 
 ### Understanding the rendering equation
@@ -570,9 +642,12 @@ Note: now, we assume that all directions are pointing outwards!
 
 - Definite integral
 
+
 $$
 \quad \int_a^b f(x) d x
 $$
+
+
 
 - Random variable
 
@@ -580,11 +655,16 @@ $$
 \quad X_i \sim p(x)
 $$
 
+
+
 - Monte Carlo estimator
+
 
 $$
 \quad F_N=\int f(x) \mathrm{d} x=\frac{1}{N} \sum_{i=1}^N \frac{f\left(X_i\right)}{p\left(X_i\right)}
 $$
+
+
 
 - Note that
   - The more samples, the less variance. 
@@ -595,23 +675,33 @@ $$
 - 如果随机变量均匀采样（均匀分布），Monte Carlo Integration 有以下形式
 
   - Definite integral 
+    
+    
     $$
     \int_a^b f(x) d x
     $$
-
+    
   - **Uniform** random variable
+  
+    
 
   $$
   X_i \sim p(x)=\frac{1}{b-a}
   $$
+  
+  
 
   - Basic Monte Carlo estimator
-
+  
+    
+  
   $$
   F_N=\frac{b-a}{N} \sum_{i=1}^N f\left(X_i\right)
   $$
-
   
+  
+
+
 
 ## Path Tracing
 
@@ -639,9 +729,13 @@ For Whitted-style ray tracing, it has some cons/ simplifications
 #### Problem Summary: Whitted-Style Ray Tracing is Wrong
 
 But the rendering equation is correct
+
+
 $$
 L_o\left(p, \omega_o\right)=L_e\left(p, \omega_o\right)+\int_{\Omega^{+}} L_i\left(p, \omega_i\right) f_r\left(p, \omega_i, \omega_o\right)\left(n \cdot \omega_i\right) \mathrm{d} \omega_i
 $$
+
+
 But it involves 
 
 - Solving an integral over the hemisphere, and 
@@ -652,12 +746,17 @@ But it involves
 ![image-20221113154428546](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211131544595.png)
 
 因此，对于着色点 $p$ 的 Monte Carlo Integration 为
+
+
+
 $$
 \begin{aligned}
 L_o\left(p, \omega_o\right) &=\int_{\Omega^{+}} L_i\left(p, \omega_i\right) f_r\left(p, \omega_i, \omega_o\right)\left(n \cdot \omega_i\right) \mathrm{d} \omega_i \\
 & \approx \frac{1}{N} \sum_{i=1}^N \frac{L_i\left(p, \omega_i\right) f_r\left(p, \omega_i, \omega_o\right)\left(n \cdot \omega_i\right)}{p\left(\omega_i\right)}
 \end{aligned}
 $$
+
+
 
 ```
 shade(p, wo)
@@ -770,13 +869,20 @@ shade(p, wo)
   - 我们只要知道 $\mathrm{d} \omega$ 和 $\mathrm{d}A$ 的关系即可
 
     - Recall the alternative def. of solid angle: **Projected area on the unit sphere**
+    
     - 将 $\mathrm{d}A$ 往单位球上投影即可 ( $\mathrm{d} A \cos \theta^{\prime}$ 就是把面转到朝向中心的方向，根据立体角的定义来理解下面的式子)
-
+    
+      
+    
     $$
     \mathrm{d} \omega=\frac{\mathrm{d} A \cos \theta^{\prime}}{\left\|x^{\prime}-x\right\|^2}
     $$
 
+  
+
 - 我们重写渲染方程即可（变量替换，改变积分域）
+  
+  
   $$
   \begin{aligned}
   L_o\left(x, \omega_o\right) &=\int_{\Omega^{+}} L_i\left(x, \omega_i\right) f_r\left(x, \omega_i, \omega_o\right) \cos \theta \mathrm{d} \omega_i \\
@@ -784,6 +890,8 @@ shade(p, wo)
   \end{aligned}
   $$
   
+
+
 
 Previously, we assume the light is “accidentally” shot by uniform hemisphere sampling 
 

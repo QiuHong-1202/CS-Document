@@ -1,4 +1,4 @@
-# Geometry 1 (Introduction)
+# Lecture 10 Geometry 1 (Introduction)
 
 ## Ways to Represent Geometry
 
@@ -6,9 +6,12 @@
 
 - 只告诉点满足某种约束或关系，并不给出实际的点，也就是说，定义 
 
+
 $$
 f(x,y,z) = 0
 $$
+
+
 
 - 例如，定义三维空间中的点，满足，$x^2+y^2+z^2 = 1 $
 - 判断一个面有哪些点是困难的，判断一个点与面的位置关系是容易的
@@ -53,9 +56,12 @@ Cons:
 
 - 通过参数映射的方式定义空间中的点
 
+
 $$
 f: \mathbb{R}^2 \rightarrow \mathbb{R}^3 ;(u, v) \mapsto(x, y, z)
 $$
+
+
 
 ![image-20221005171822469](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210051719954.png)
 

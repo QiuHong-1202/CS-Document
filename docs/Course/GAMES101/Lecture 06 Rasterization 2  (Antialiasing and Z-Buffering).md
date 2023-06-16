@@ -1,4 +1,4 @@
-# Rasterization 2  (Antialiasing and Z-Buffering)
+# Lecture 06 Rasterization 2  (Antialiasing and Z-Buffering)
 
 ## Sampling theory
 

@@ -1,4 +1,4 @@
-# Materials and Appearances
+# Lecture 17 Materials and Appearances
 
 ## Material = BRDF
 
@@ -13,6 +13,8 @@ Suppose the incident lighting is uniform（均匀的）and diffuse $\to$ 入射�
 这样就可以写出渲染方程，没有自己发光项
 
 简化渲染方程，假设入射的 radiance 为常数，BRDF 为常数，结果就是对半球上的一个 $\cos\theta$ 函数的积分 $\to \ \pi$ 
+
+
 $$
 \begin{aligned}
 L_o\left(\omega_o\right) &=\int_{H^2} f_r L_i\left(\omega_i\right) \cos \theta_i \mathrm{~d} \omega_i \\
@@ -22,18 +24,28 @@ L_o\left(\omega_o\right) &=\int_{H^2} f_r L_i\left(\omega_i\right) \cos \theta_i
 $$
 
 
+
 由于能量守恒，入射的 radiance= 出射的 radiance，即 $L_i = L_o$，所以有
+
+
 $$
 \text{BRDF}=f_r = \frac{1}{\pi}
 $$
 
+
+
 - albedo (color) [反射率，可以引入不同的颜色] 
+
 
 $$
 f_r=\frac{\rho}{\pi}
 $$
 
+
+
 ![image-20221119114803691](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211191148715.png)
+
+
 
 ### Glossy material (BRDF)
 
@@ -52,12 +64,16 @@ $$
 - 性质：入射光和出射光的角平分线一定是法线
 
 ![image-20221119204330472](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192043500.png)
+
+
 $$
 \begin{aligned}
 &\omega_o+\omega_i=2 \cos \theta \overrightarrow{\mathrm{n}}=2\left(\omega_i \cdot \overrightarrow{\mathrm{n}}\right) \overrightarrow{\mathrm{n}} \\
 &\omega_o=-\omega_i+2\left(\omega_i \cdot \overrightarrow{\mathrm{n}}\right) \overrightarrow{\mathrm{n}}
 \end{aligned}
 $$
+
+
 
 ### Snell’s Law
 
@@ -84,6 +100,7 @@ $$
 
 - Accurate: need to consider polarization 考虑光的两个极化
 
+
 $$
 \begin{aligned}
 &R_{\mathrm{s}}=\left|\frac{n_1 \cos \theta_{\mathrm{i}}-n_2 \cos \theta_{\mathrm{t}}}{n_1 \cos \theta_{\mathrm{i}}+n_2 \cos \theta_{\mathrm{t}}}\right|^2=\left|\frac{n_1 \cos \theta_{\mathrm{i}}-n_2 \sqrt{1-\left(\frac{n_1}{n_2} \sin \theta_{\mathrm{i}}\right)^2}}{n_1 \cos \theta_{\mathrm{i}}+n_2 \sqrt{1-\left(\frac{n_1}{n_2} \sin \theta_{\mathrm{i}}\right)^2}}\right|^2, \\
@@ -91,13 +108,22 @@ $$
 \end{aligned}
 $$
 
+
+
 再取它们的平均即可，即
+
+
 $$
 R_{\mathrm{eff}}=\frac{1}{2}\left(R_{\mathrm{s}}+R_{\mathrm{p}}\right)
 $$
 
+
+
 - Approximate: Schlick’s approximation
+
   - 对刚刚的精确公式拟合一个曲线，设基准反射率为 $R_0$
+
+    
 
 $$
 \begin{aligned}
@@ -105,6 +131,8 @@ R(\theta) &=R_0+\left(1-R_0\right)(1-\cos \theta)^5 \\
 R_0 &=\left(\frac{n_1-n_2}{n_1+n_2}\right)^2
 \end{aligned}
 $$
+
+
 
 ## Microfacet Material
 
@@ -145,12 +173,15 @@ Individual elements of surface act like **mirrors** （每一个微表面可以�
   - 识别：BRDF 在方位上旋转得到相同的 BRDF
 
   - Reflection depends on azimuthal angle $\phi$
+    
+    
     $$
     f_r\left(\theta_i, \phi_i ; \theta_r, \phi_r\right) \neq f_r\left(\theta_i, \theta_r, \phi_r-\phi_i\right)
     $$
-
+    
+    
   - Example
-
+  
     ![image-20221119233620355](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192336436.png)
 
 ![image-20221119233353400](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192333449.png)
@@ -158,44 +189,64 @@ Individual elements of surface act like **mirrors** （每一个微表面可以�
 ## Properties of BRDFs
 
 - Non-negativity
+
+
 $$
 f_r\left(\omega_i \rightarrow \omega_r\right) \geq 0
 $$
+
+
 - Linearity 线性性质（可以加起来）
+
 
 $$
 L_r\left(\mathrm{p}, \omega_r\right)=\int_{H^2} f_r\left(\mathrm{p}, \omega_i \rightarrow \omega_r\right) L_i\left(\mathrm{p}, \omega_i\right) \cos \theta_i \mathrm{~d} \omega_i
 $$
 
+
+
 ![image-20221119234031903](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192340938.png)
 
 - Reciprocity principle 可逆性（交换入射方向和出射方向的角色，得到的 BRDF 相同）
+
+  
 
 $$
 f_r\left(\omega_r \rightarrow \omega_i\right)=f_r\left(\omega_i \rightarrow \omega_r\right)
 $$
 
+
+
 ![image-20221119234139136](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192341164.png)
 
 - Energy conservation 能量守恒
   - 在 Path Tracing 时经过无限次的光线弹射，最后的光线收敛就是因为能量守恒
+  
+    
 
 $$
 \forall \omega_r \int_{H^2} f_r\left(\omega_i \rightarrow \omega_r\right) \cos \theta_i \mathrm{~d} \omega_i \leq 1
 $$
 
+
+
 - Isotropic vs. anisotropic
+
   - If isotropic, $f_r\left(\theta_i, \phi_i ; \theta_r, \phi_r\right)=f_r\left(\theta_i, \theta_r, \phi_r-\phi_i\right)$
-  
+
     - 各向同性意味着 BRDF 之和相对的方位角有关，实际上此时 $f_r$ 为三维
-  
+
   - Then, from reciprocity,
-  
+
     - 相对的方位角不用考虑正负 $\to$ BRDF 的测量与储存
-  
+
+      
+    
     $$
     f_r\left(\theta_i, \theta_r, \phi_r-\phi_i\right)=f_r\left(\theta_r, \theta_i, \phi_i-\phi_r\right)=f_r\left(\theta_i, \theta_r,\left|\phi_r-\phi_i\right|\right)
     $$
+
+
 
 ![image-20221119234526364](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192345400.png)
 

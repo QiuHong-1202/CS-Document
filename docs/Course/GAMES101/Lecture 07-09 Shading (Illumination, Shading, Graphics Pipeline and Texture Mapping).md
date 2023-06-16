@@ -1,4 +1,4 @@
-# Shading 1 (Illumination, Shading and Graphics Pipeline)
+# Lecture 07-09 Shading (Illumination, Shading, Graphics Pipeline and Texture Mapping)
 
 ## Shading
 
@@ -75,12 +75,16 @@
 - 布林冯反射模型由环境光照，漫反射和高光组成
 
 ![image-20220930103255408](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202209301032438.png)
+
+
 $$
 \begin{aligned}
 L &=L_a+L_d+L_s \\
 &=k_a I_a+k_d\left(I / r^2\right) \max (0, \mathbf{n} \cdot \mathbf{l})+k_s\left(I / r^2\right) \max (0, \mathbf{n} \cdot \mathbf{h})^p
 \end{aligned}
 $$
+
+
 
 ## Shading Frequencies 着色频率
 
@@ -117,9 +121,12 @@ $$
 - 如果知道了想表示什么，问题就简单了，例如要想表示一个球，那使用三角形构成的几何体的顶点的法线就从球心出发
 - 使用临近的面的法线求平均值（根据面的面积加权求平均值）
 
+
 $$
 N_v=\frac{\sum_i N_i}{\left\|\sum_i N_i\right\|}
 $$
+
+
 
 - 根据顶点的法线求面上的法线 $\to$  重心坐标
 
@@ -177,12 +184,16 @@ $$
 ### Barycentric Coordinates 重心坐标
 
 对于三角形所在任意平面上的一个点 $(x,y)$ 都可以用以下线性组合表示
+
+
 $$
 \begin{aligned}
 &(x, y)=\alpha A+\beta B+\gamma C\\
 &且\ \alpha+\beta+\gamma=1
 \end{aligned}
 $$
+
+
 
 - 如果点在三角形内，需要满足 $\alpha,\beta,\gamma>0$
 - 根据重心坐标的定义，三角形顶点本身的重心坐标很容易得到，如下图
@@ -195,6 +206,8 @@ $$
 ![image-20221003162544991](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210031625024.png)
 
 对于重心坐标，有以下的一般表达式
+
+
 $$
 \begin{aligned}
 \alpha &=\frac{-\left(x-x_B\right)\left(y_C-y_B\right)+\left(y-y_B\right)\left(x_C-x_B\right)}{-\left(x_A-x_B\right)\left(y_C-y_B\right)+\left(y_A-y_B\right)\left(x_C-x_B\right)} \\
@@ -202,6 +215,8 @@ $$
 \gamma &=1-\alpha-\beta
 \end{aligned}
 $$
+
+
 
 - 【注意】**重心坐标并不在投影下保持不变**，如果要插值三维空间的图形，需要在投影前在三维的空间中进行插值
 
