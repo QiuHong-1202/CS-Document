@@ -35,6 +35,13 @@
 |   积分   |      \int_{0}^{+\infty}       |      $\int_{0}^{+\infty}$       |
 |  求偏导  | \frac{\partial f}{\partial x} | $\frac{\partial f}{\partial x}$ |
 
+### Mathcal
+
+|   渲染前    |    渲染后     |
+| :---------: | :-----------: |
+| \mathcal{R} | $\mathcal{R}$ |
+| \mathcal{L} | $\mathcal{L}$ |
+
 ## 关系符
 
 P.S. 如无特殊说明下面的关系符的否定形式都为肯定形式的源码前加上 `not`
