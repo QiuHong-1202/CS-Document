@@ -25,6 +25,8 @@
 |          加减           |  \pm   |  $\pm$   |
 |          减加           |  \mp   |  $\mp$   |
 | Nabla算子/梯度/向量微分 | \nabla | $\nabla$ |
+|           星            |  \ast  |  $\ast$  |
+|         五角星          | \star  | $\star$  |
 
 ### 大型运算符
 
