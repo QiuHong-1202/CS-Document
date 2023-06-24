@@ -400,8 +400,9 @@ $$
   - 最优解附近表面会比较平
 - 使用 $\mathcal{N}(0,0.01)$ 来初始可能对小网络没问题, 但不能保证深度神经网络
 
-## Latent Space & Code
+## Latent = hidden
 
+- [latent vector](https://ai.stackexchange.com/questions/12499/why-is-it-called-latent-vector)
 - latent code: 为了更好的对数据进行分类或生成，需要对数据的特征进行表示，但是数据有很多特征，这些特征之间相互关联，耦合性较高，导致模型很难弄清楚它们之间的关联，使得学习效率低下，因此需要寻找到这些表面特征之下隐藏的深层次的关系，将这些关系进行解耦，得到的隐藏特征，即 latent code
 - latent space: 由 latent code 组成的空间
 
