@@ -2,12 +2,12 @@
 
 ## 数集符
 
-| 中文名称 |   渲染前   |    渲染后    |
-| :------: | :--------: | :----------: |
-|  自然数  | \mathbb{N} | $\mathbb{N}$ |
-|   实数   | \mathbb{R} | $\mathbb{R}$ |
-|   整数   | \mathbb{Z} | $\mathbb{Z}$ |
-|  有理数  | \mathbb{Q} | $\mathbb{Q}$ |
+| 中文名称 |          渲染前           |            渲染后             |
+| :------: | :-----------------------: | :---------------------------: |
+|  自然数  |        \mathbb{N}         |         $\mathbb{N}$          |
+|   实数   | \mathbb{R} 或 \mathcal{R} | $\mathbb{R}$ 或 $\mathcal{R}$ |
+|   整数   |        \mathbb{Z}         |         $\mathbb{Z}$          |
+|  有理数  |        \mathbb{Q}         |         $\mathbb{Q}$          |
 
 ## 运算符
 
