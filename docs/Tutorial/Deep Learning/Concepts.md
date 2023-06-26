@@ -423,3 +423,4 @@ $$
 # Concept Links
 
 - [nn.Module 类与前向传播函数 forward 的理解](https://www.cnblogs.com/luckyplj/p/13378293.html)
+- [Feature Propagation 特征传播](https://towardsdatascience.com/learning-on-graphs-with-missing-features-dd34be61b06)

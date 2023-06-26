@@ -1,4 +1,4 @@
-# Attention
+# 注意力机制和 Transformer
 
 ## Attention Mechanism
 
@@ -69,7 +69,7 @@ $$
 
 用数学语言描述, 假设有一个查询 $\mathbf{q} \in \mathbb{R}^q$ 和 $m$ 个 “键一值" 对 $\left(\mathbf{k}_1, \mathbf{v}_1\right), \ldots,\left(\mathbf{k}_m, \mathbf{v}_m\right)$, 其中 $\mathbf{k}_i \in \mathbb{R}^k, \mathbf{v}_i \in \mathbb{R}^v$ 。注意力汇聚函数 $f$ 就被表示成值的加权和:
 
- 
+
 $$
 f\left(\mathbf{q},\left(\mathbf{k}_1, \mathbf{v}_1\right), \ldots,\left(\mathbf{k}_m, \mathbf{v}_m\right)\right)=\sum_{i=1}^m \alpha\left(\mathbf{q}, \mathbf{k}_i\right) \mathbf{v}_i \in \mathbb{R}^v,
 $$
