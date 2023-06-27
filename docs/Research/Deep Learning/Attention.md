@@ -1,4 +1,4 @@
-# 注意力机制和 Transformer
+# Attention & Transformer
 
 ## Attention Mechanism
 
