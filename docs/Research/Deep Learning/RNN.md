@@ -1,4 +1,4 @@
-# 序列和RNN
+# Sequence & RNN
 
 ## 序列模型
 

@@ -1,4 +1,4 @@
-# 卷积和卷积神经网络
+# Convolution & CNN
 
 ## 卷积层
 
