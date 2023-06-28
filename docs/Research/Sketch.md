@@ -9,15 +9,16 @@
   - 为什么不使用 LSTM 而使用 Transformer 作为 decoder：作者认为 seq2seq 模型的有限时间范围可能会阻止这种表示法对长而复杂的草图进行建模
 
 - `[BMVC20]` **SketchHealer**: A Graph-to-Sequence Network for Recreating Partial Human Sketches
+  - 功能：sketch healing
   - 架构：GCN-based encoder，LSTM decoder
-
+  
 - `[ICCV21]` **SketchLattice**: Latticed Representation for Sketch Manipulation
   - 功能：sketch healing、基于图像的草图合成
-  - 架构：GCN encoder，LSTM decoder
+  - 架构：利用一个网格图 (Lattice Graph) 对草图图像进行采样以生成草图的网格表示，GCN-based encoder，LSTM decoder
 
 - `[IJCV22]` **SketchHealer-2.0**: Generative Sketch Healing
   - 功能：sketch healing（对于随机缺失的笔画 $p_{mask}$ 进行重绘，作者特意强调了自己的任务是修复并且和 SketchRNN 不改变原有笔画的预测任务 `completion` 不同）
-  - 架构：利用一个网格图 (Lattice Graph) 对草图图像进行采样以生成草图的网格表示，GCN-based encoder，LSTM decoder
+  - 架构：GCN encoder，LSTM decoder
   - 和 `SketchHealer1.0` 相比，增加了一个 `Perceptual Metric` 
 
 - `[AAAI23]` **SP-gra2seq**: Linking Sketch Patches by Learning Synonymous Proximity for Graphic Sketch Representation
