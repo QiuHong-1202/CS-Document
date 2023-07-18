@@ -1,4 +1,4 @@
-## Sketch Article
+## Sketch Gengeration
 
 - `[ICLR18]` **SketchRNN**: A neural representation of sketch drawings
   - 功能：无条件生成、条件重建、插值、不改变原有笔画地进行预测（给定的笔画较少、生成概念性的草图、要求在现有输入笔画的上方顺序排列）
@@ -31,7 +31,8 @@
 
 
 
-## 数据集
+## Line Drawing Vectorization
 
-- QuickDraw50M
-  - 包含 345 个对象类别的超过 5000 万个草图, 草图包含笔画序列
+- `[EG20]` Integer-Grid Sketch Simplification and Vectorization
+  - 功能：解决复杂条件下的 sketch simplification & vectorization，尤其是 parallel stroke 的合并
+
