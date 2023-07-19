@@ -67,13 +67,14 @@
 ### Parametrization
 
 
+
 $$
 \text { minimize } E[f]=E_{\text {field-aligned }}+\mu E_{\text {snap }}+\varepsilon E_{\text {reg }} \text { s.t. } f \text { is seamless }
 $$
 
 
 
-  - $E_{\text {field-aligned }}$: a frame should be mapped to the canonical frame, and have a parameter control how many strokes should be merged
+$E_{\text {field-aligned }}$: a frame should be mapped to the canonical frame, and have a parameter control how many strokes should be merged
 
 ![image-20230718174607307](./assets/image-20230718174607307.png)
 
@@ -82,13 +83,17 @@ $$
 E_{\text {align }}=\sum_{T \in \mathcal{T}}\left\|\mathcal{J}_f \tilde{\phi}-\mathrm{I}\right\|_{\mathrm{F}}^2
 $$
 
+$\mu E_{\text {snap }}$: snapping grid to the isoline (intuition: nearby strokes can be grouped together by assigning them to the same, quantized isoline of the parametrization.)
 
-  - $\mu E_{\text {snap }}$: snapping grid to the isoline (intuition: nearby strokes can be grouped together by assigning them to the same, quantized isoline of the parametrization.)
-    - 每个三角面片都有两个 direction $u, v$ ，其中一个 direction 会被选择为 tangent direction
-    - 假设一个三角面片的 tangent direction 为 $u ， u$ 要尽可能的靠近参数空间中的 isoline，另一个 direction 会被施加约束
-    - Additional integer variable $(i, j)$ : 表示参数空间中的 isoline
-    - 此项被定义为一个 soft constraint，使得 stroke 三角形的受约束参数受到其最近 integer variable 的吸引
-    - 注: 这里的 additional integer variable 并不是一个三角面片一个，而是决定好一个三角面片之后，周围的三角面片使用同样的 additional integer variable
+
+
+- 每个三角面片都有两个 direction $u, v$ ，其中一个 direction 会被选择为 tangent direction
+- 假设一个三角面片的 tangent direction 为 $u ， u$ 要尽可能的靠近参数空间中的 isoline，另一个 direction 会被施加约束
+- Additional integer variable $(i, j)$ : 表示参数空间中的 isoline
+- 此项被定义为一个 soft constraint，使得 stroke 三角形的受约束参数受到其最近 integer variable 的吸引
+- 注: 这里的 additional integer variable 并不是一个三角面片一个，而是决定好一个三角面片之后，周围的三角面片使用同样的 additional integer variable 
+
+
 
 ![image-20230718174746682](./assets/image-20230718174746682.png)
 
@@ -105,7 +110,7 @@ $$
 
 ![image-20230718175024482](./assets/image-20230718175024482.png)
 
-  - $\varepsilon E_{r e g}:$ L2 regression
+$\varepsilon E_{r e g}:$ L2 regression
 
 ### Extraction & Fitting
 
