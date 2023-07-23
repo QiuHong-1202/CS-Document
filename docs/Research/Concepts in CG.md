@@ -1,0 +1,3 @@
+- [体素 (voxel)](https://zhuanlan.zhihu.com/p/348563616)
+  - voxelize 体素化
+- [负对数似然 (negative log-likelihood NLL)](https://blog.csdn.net/silver1225/article/details/88914652)
