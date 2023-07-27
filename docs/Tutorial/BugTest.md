@@ -49,14 +49,13 @@ E_{\text {snap }}=\sum_{c \in \mathcal{C}_{\mathrm{c}}} w_{\text {snap }}\|u-\ba
 $$
 
 - Choose Tangent Direction
-  - trace the streamlines in each of the two frame field directions
-  - count the number of black pixels encountered by each streamline
-  - direction with more black pixels is the tangent direction
-  - Note: black dots correspond to cases when the two pixel counts are very close, in which cas we leave the triangle unlabelled and we don't use it for snapping
+    - trace the streamlines in each of the two frame field directions
+    - count the number of black pixels encountered by each streamline
+    - direction with more black pixels is the tangent direction
+    - Note: black dots correspond to cases when the two pixel counts are very close, in which cas we leave the triangle unlabelled and we don't use it for snapping
 
 
-
-  - $\varepsilon E_{r e g}:$ L2 regression
+- $\varepsilon E_{r e g}:$ L2 regression
 
 
 
