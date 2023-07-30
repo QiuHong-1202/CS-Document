@@ -3,23 +3,23 @@
 ## Why Ray Tracing
 
 - 光栅化不能得到很好的全局光照效果
-  - 软阴影
-  - 光线弹射超过一次（间接光照）
+    - 软阴影
+    - 光线弹射超过一次（间接光照）
 - 光栅化是一个快速的近似，但是质量较低
 
 ![image-20221104143911413](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211041439617.png)
 
 - 光线追踪是准确的，但是较慢
-  - Rasterization: **real-time**, ray tracing: **offline**
-  - 生成一帧需要一万CPU小时
+    - Rasterization: **real-time**, ray tracing: **offline**
+    - 生成一帧需要一万CPU小时
 
 ## Basic Ray-Tracing Algorithm
 
 - 图形学上的光线定义
-  - 光线是沿直线传播的
-  - 两个或多个光线不会发生碰撞
-  - 光线一定会从光源出发到达我们的眼镜
-    - light reciprocity 光路的可逆性
+    - 光线是沿直线传播的
+    - 两个或多个光线不会发生碰撞
+    - 光线一定会从光源出发到达我们的眼镜
+      - light reciprocity 光路的可逆性
 
 ### Pinhole Camera Model
 
@@ -107,13 +107,13 @@ $$
 #### Convert It to Ray Intersection With Plane
 
 - Applications
-  - Rendering: visibility, shadows, lighting
-  - Geometry: inside/outside test （计算是否一个点是否在形状内部或者是外部，封闭物体）
-    - 在形状上取一个点找一个光线求交点，如果是奇数个交点，那么点就一定在物体内，否则在物体外
+    - Rendering: visibility, shadows, lighting
+    - Geometry: inside/outside test （计算是否一个点是否在形状内部或者是外部，封闭物体）
+      - 在形状上取一个点找一个光线求交点，如果是奇数个交点，那么点就一定在物体内，否则在物体外
 
 - Compute
-  - Simple idea: just intersect ray with each triangle [Simple, but slow (acceleration?) ]
-  - **Acceleration: 将光线和三角形求交转化为光线和平面求交，然后再判定交点是否在三角形内**
+    - Simple idea: just intersect ray with each triangle [Simple, but slow (acceleration?) ]
+    - **Acceleration: 将光线和三角形求交转化为光线和平面求交，然后再判定交点是否在三角形内**
 
 #### Plane Equation
 
@@ -161,38 +161,38 @@ $$
 ## Accelerating Ray-Surface Intersection
 
 - Simple ray-scene intersection
-  - Exhaustively test ray-intersection with every triangle
-  - Find the closest hit (i.e. minimum t)
+    - Exhaustively test ray-intersection with every triangle
+    - Find the closest hit (i.e. minimum t)
 - Problem
-  - Naive algorithm = #pixels ⨉ # triangles (⨉ #bounces)
-  - Slow!!!
+    - Naive algorithm = #pixels ⨉ # triangles (⨉ #bounces)
+    - Slow!!!
 
 ### Bounding Volumes
 
 - Quick way to avoid intersections: **bound complex object with a simple volume**
-  - Object is fully contained in the volume
-  - If it doesn’t hit the volume, it doesn’t hit the object
-  - So test BVol first, then test object if it hits (如果一个光线连包围盒都碰不到，就也不可能碰到里面的物体)
+    - Object is fully contained in the volume
+    - If it doesn’t hit the volume, it doesn’t hit the object
+    - So test BVol first, then test object if it hits (如果一个光线连包围盒都碰不到，就也不可能碰到里面的物体)
 - Understanding: box is the intersection of 3 pairs of slabs (认为长方体是三组对面形成的交集)
 - Specifically: We often use an Axis-Aligned Bounding Box (AABB) [轴对齐包围盒]
 
 ### Ray Intersection with Axis-Aligned Box
 
 - 考虑二维的情况（两组对面）: Compute intersections with slabs and take intersection of $t_{min}/t_{max}$ intervals
-  - 对得到的两组线段求交集即可
+    - 对得到的两组线段求交集即可
 
 ![image-20221104155547737](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211041555783.png)
 
 - Recall: a box (3D) = three pairs of infinitely large slabs
 - Key ideas
-  - The ray enters the box only when it enters all pairs of slabs（如果三个对面都有光线进入，才能说光线进入了盒子）
-  - The ray exits the box as long as it exits any pair of slabs （只要光线离开任意一个对面，光线就算离开了这个盒子）
+    - The ray enters the box only when it enters all pairs of slabs（如果三个对面都有光线进入，才能说光线进入了盒子）
+    - The ray exits the box as long as it exits any pair of slabs （只要光线离开任意一个对面，光线就算离开了这个盒子）
 - For each pair, calculate the $t_{min}$ and $t_{max}$ (negative is fine)
 - For the 3D box, $t_{enter} = \max\{t_{min}\}, t_{exit} = \min\{t_{max}\}$
 - If $t_{enter} < t_{exit}$, we know the ray **stays a while** in the box (so they must intersect!) 
 - physical correctness
-  - $t_{exit}<0$, The box is **"behind"** the ray — **no intersection**
-  - $t_{exit}\ge0, t_{enter}<0$, The ray’s **origin is inside** the box — certainly **have intersection**
+    - $t_{exit}<0$, The box is **"behind"** the ray — **no intersection**
+    - $t_{exit}\ge0, t_{enter}<0$, The ray’s **origin is inside** the box — certainly **have intersection**
 
 In summary, Ray and AABB intersect iff
 
@@ -218,7 +218,7 @@ $$
 1. Find bounding box  
 2. Create grid
 3. Store each object in overlapping cells
-   - 只考虑物体的表面
+     - 只考虑物体的表面
 
 ![image-20221109153749735](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211091537818.png)
 
@@ -226,13 +226,13 @@ $$
 
 1. Step through grid in ray traversal order 
 2. For each grid cell, Test intersection with all objects stored at that cell
-   - 让光线经过各个包围盒中的区块，让光线和盒子求交（假设光线和盒子求交的运行速度远大于和物体求交的运行速度）
-   - 如果发现和光线相交的盒子内有物体，再让物体和盒子求交，通过这样找到所有的交点
+     - 让光线经过各个包围盒中的区块，让光线和盒子求交（假设光线和盒子求交的运行速度远大于和物体求交的运行速度）
+     - 如果发现和光线相交的盒子内有物体，再让物体和盒子求交，通过这样找到所有的交点
 
 - **Grid Resolution?**
-  - Heuristic
-    - \#cells = C * #objs  
-    - C = 27 in 3D
+    - Heuristic
+      - \#cells = C * #objs  
+      - C = 27 in 3D
 
 - **Pros & Cons**
 
@@ -246,30 +246,30 @@ $$
 
 - Examples
 
-  - **Oct-Tree**: 以下的八叉树是二维的情况，在二维空间中就是四叉的，把空间切成了不均匀的结构
-  - **KD-Tree**: KD-Tree 永远是找到一个轴把空间分成两个部分，和维数无关，把空间划分成了类似二叉树的结构，水平划分和数值划分是交替的以保证空间的划分是均匀的，计算简单
-  - **BSP-Tree**: 对空间的二分方法，每一次选择一个方向把节点的分开，和 KD-Tree 的区别是不是横平竖直的划分，会随着维度的升高计算变得复杂
+    - **Oct-Tree**: 以下的八叉树是二维的情况，在二维空间中就是四叉的，把空间切成了不均匀的结构
+    - **KD-Tree**: KD-Tree 永远是找到一个轴把空间分成两个部分，和维数无关，把空间划分成了类似二叉树的结构，水平划分和数值划分是交替的以保证空间的划分是均匀的，计算简单
+    - **BSP-Tree**: 对空间的二分方法，每一次选择一个方向把节点的分开，和 KD-Tree 的区别是不是横平竖直的划分，会随着维度的升高计算变得复杂
 
   ![image-20221109155342166](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211091553212.png)
 
 - **KD-Tree Pre-Processing**
-  - 此处只考虑每个格子划分了一次，实际中别的格子可能也需要划分
-  - 只在叶子节点存储三角形
+    - 此处只考虑每个格子划分了一次，实际中别的格子可能也需要划分
+    - 只在叶子节点存储三角形
 
 ![image-20221109160116986](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211091601017.png)
 
 - **Data Structure for KD-Trees**
-  - Internal nodes store  
-    - split axis: x-, y-, or z-axis
-    - split position: coordinate of split plane along axis
-    - children: pointers to child nodes
-    - **No objects are stored in internal nodes** 
-  - Leaf nodes store
-    -  list of objects
+    - Internal nodes store  
+      - split axis: x-, y-, or z-axis
+      - split position: coordinate of split plane along axis
+      - children: pointers to child nodes
+      - **No objects are stored in internal nodes** 
+    - Leaf nodes store
+      -  list of objects
 
 - **Cons of KD-Tree**
-  - 很难判定一个三角形是否和一个立方体有交集，算法很难实现
-  - 如果一个物体和多个盒子都有交集（出现在多个叶子节点中），KD-Tree 在这点上并不直观
+    - 很难判定一个三角形是否和一个立方体有交集，算法很难实现
+    - 如果一个物体和多个盒子都有交集（出现在多个叶子节点中），KD-Tree 在这点上并不直观
 
 ### Object Partitions & Bounding Volume Hierarchy (BVH)
 
@@ -282,36 +282,36 @@ $$
 ![image-20221109172510994](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211091725026.png)
 
 - **Pros of BVH**
-  - 节省了三角形和包围盒求交问题
-  - 保证了一个三角形只在一个盒子里
+    - 节省了三角形和包围盒求交问题
+    - 保证了一个三角形只在一个盒子里
 - **Cons of BVH**
-  - 不同的 Bounding Box 是有可能相交的
-  - 不能解决动态的物体，BVH 需要重新计算
+    - 不同的 Bounding Box 是有可能相交的
+    - 不能解决动态的物体，BVH 需要重新计算
 - **Summary**
-  - Find bounding box
-  - Recursively split set of objects in two subsets
-  - Recompute the bounding  box of the subsets
-  - Stop when necessary
-  - Store objects in each leaf node
+    - Find bounding box
+    - Recursively split set of objects in two subsets
+    - Recompute the bounding  box of the subsets
+    - Stop when necessary
+    - Store objects in each leaf node
 - **Methods to subdivide a node**
-  - Choose a dimension to split
-  - Heuristic #1: Always choose the longest axis in node
-    - 让最长的轴变短，让最终的划分是比较均匀的
-  - Heuristic #2: Split node at location of **median** object
-    - 取中间的物体指的是，如果有 $n$ 个三角形，找的是 $\frac{n}{2}$ 处的三角形，保证切分后的三角形数量差不多，以保证生成的树是平衡的，减少最终的搜索时间
-    - 给任意一列无序的数，找到它第 $i$ 大的数，可以使用快速选择算法，在 $O(n)$ 内解决
+    - Choose a dimension to split
+    - Heuristic #1: Always choose the longest axis in node
+      - 让最长的轴变短，让最终的划分是比较均匀的
+    - Heuristic #2: Split node at location of **median** object
+      - 取中间的物体指的是，如果有 $n$ 个三角形，找的是 $\frac{n}{2}$ 处的三角形，保证切分后的三角形数量差不多，以保证生成的树是平衡的，减少最终的搜索时间
+      - 给任意一列无序的数，找到它第 $i$ 大的数，可以使用快速选择算法，在 $O(n)$ 内解决
 
 - **Termination criteria**
-  - Heuristic: stop when node contains few elements (e.g. 5)
+    - Heuristic: stop when node contains few elements (e.g. 5)
 - **Data Structure for BVHs**
-  - Internal nodes store
-    - Bounding box
-    - Children: pointers to child nodes 
-  - Leaf nodes store
-    - Bounding box
-    - List of objects 
-  - Nodes represent subset of primitives in scene
-    - All objects in subtree
+    - Internal nodes store
+      - Bounding box
+      - Children: pointers to child nodes 
+    - Leaf nodes store
+      - Bounding box
+      - List of objects 
+    - Nodes represent subset of primitives in scene
+      - All objects in subtree
 
 #### BVH Traversal
 
@@ -339,7 +339,7 @@ fun Intersect(Ray ray, BVH node) {
 - 在计算光强的时候，我们没有准确的物理定义
 - 辐射度量学：定义了一系列方法和单位去描述光照
 - Accurately measure the spatial properties of light
-  - New terms: **Radiant flux, intensity, irradiance, radiance**
+    - New terms: **Radiant flux, intensity, irradiance, radiance**
 
 - Perform lighting calculations **in a physically correct manner**
 
@@ -362,9 +362,9 @@ $$
 
 - Flux (Power): 光源辐射出的单位时间的能量，目的是分析和比较两个和多个能量（去除时间的影响）
 
-  - lm = lumen (Flux 的单位，翻译是**流明**)
+    - lm = lumen (Flux 的单位，翻译是**流明**)
 
-  - Flux 也可以理解为单位时间通过一个感光平面的光子数目
+    - Flux 也可以理解为单位时间通过一个感光平面的光子数目
 
     
 
@@ -377,9 +377,9 @@ $$
 ## Radiant Intensity
 
 - Radiant Intensity: The radiant (luminous) intensity is the power per unit **solid angle** (立体角) emitted by a point light source.
-  - 可以理解为能量除以立体角
+    - 可以理解为能量除以立体角
   
-  - 定义了光源在任何一个方向上的亮度
+    - 定义了光源在任何一个方向上的亮度
   
     
 
@@ -397,15 +397,15 @@ $$
 ### Angles and Solid Angles
 
 - **Angle**: ratio of subtended arc length on circle to radius
-  - $\theta=\frac{l}{r}$
-  - Circle has $2 \pi$ radians
+    - $\theta=\frac{l}{r}$
+    - Circle has $2 \pi$ radians
 
 - **Solid angle**: ratio of subtended area on sphere to radius squared
-  - 弧度制在三维空间中的延申，在三维空间中找一个球，从球出发形成某个大小的锥，锥会打到球面上，形成一个面积 $A$，立体角是它除以半径的平方
-  - 把任何一个物体投影到单位球上，在单位球上框出的范围就是立体角
-  - 描述一个空间中角有多大
-  - $\Omega=\frac{A}{r^2}$
-  - Sphere has $4 \pi$ **steradians(立体角的单位)**
+    - 弧度制在三维空间中的延申，在三维空间中找一个球，从球出发形成某个大小的锥，锥会打到球面上，形成一个面积 $A$，立体角是它除以半径的平方
+    - 把任何一个物体投影到单位球上，在单位球上框出的范围就是立体角
+    - 描述一个空间中角有多大
+    - $\Omega=\frac{A}{r^2}$
+    - Sphere has $4 \pi$ **steradians(立体角的单位)**
 
 ![image-20221110005829265](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211100058306.png)
 
@@ -422,7 +422,7 @@ $$
 
 - 对于一个均匀点光源，它的 Radiant Intensity 的相关计算是
 
-  - 对于所有方向上的 Intensity 积分起来可以得到 Flux
+    - 对于所有方向上的 Intensity 积分起来可以得到 Flux
     
     
     $$
@@ -432,7 +432,7 @@ $$
     \end{aligned}
     $$
     
-  - 对于任何一个方向上的 Intensity 有
+    - 对于任何一个方向上的 Intensity 有
   
     
   
@@ -445,9 +445,9 @@ $$
 ## Irradiance
 
 - The irradiance is the **power per unit area** incident on a surface point.
-  - Intensity: **power per soild angle**
+    - Intensity: **power per soild angle**
   
-  - 注意，面需要和入射光线垂直
+    - 注意，面需要和入射光线垂直
   
     
 
@@ -467,7 +467,7 @@ $$
 Radiance is the fundamental field quantity that describes the  distribution of light in an environment
 
 - Radiance: The radiance (luminance) is the power emitted,  reflected, transmitted or received by a surface, **per unit solid angle, per projected unit area.**
-  - 考虑某一个确定的微小面和一个方向
+    - 考虑某一个确定的微小面和一个方向
 
 ![image-20221110150649434](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211101506469.png)
 
@@ -479,12 +479,12 @@ $$
 
 
 - **Recall**
-  - Irradiance: power per projected unit area
-  - Intensity: power per solid angle
+    - Irradiance: power per projected unit area
+    - Intensity: power per solid angle
 
 - **So**
-  - Radiance: Irradiance per solid angle  
-  - Radiance: Intensity per projected unit area
+    - Radiance: Irradiance per solid angle  
+    - Radiance: Intensity per projected unit area
 
 ![image-20221110151133941](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211101511981.png)
 
@@ -493,10 +493,10 @@ $$
 ## Irradiance vs. Radiance
 
 - Irradiance: total power received by area dA 
-  - 某一个小区域内接收到的所以能量
+    - 某一个小区域内接收到的所以能量
   
 - Radiance: power received by area dA from “direction” dω
-  - 某一个小区域的某一个方向上接受到的能量
+    - 某一个小区域的某一个方向上接受到的能量
   
     
 
@@ -667,21 +667,21 @@ $$
 
 
 - Note that
-  - The more samples, the less variance. 
-  - Sample on $x$, integrate on $x$. 
+    - The more samples, the less variance. 
+    - Sample on $x$, integrate on $x$. 
 
 ![image-20221113143916798](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211131439920.png)
 
 - 如果随机变量均匀采样（均匀分布），Monte Carlo Integration 有以下形式
 
-  - Definite integral 
+    - Definite integral 
     
     
     $$
     \int_a^b f(x) d x
     $$
     
-  - **Uniform** random variable
+    - **Uniform** random variable
   
     
 
@@ -691,7 +691,7 @@ $$
   
   
 
-  - Basic Monte Carlo estimator
+    - Basic Monte Carlo estimator
   
     
   
@@ -722,7 +722,7 @@ For Whitted-style ray tracing, it has some cons/ simplifications
 #### Whitted-Style Ray Tracing: Problem 2
 
 - 对于 Whitted-Style Ray Tracing, **No reflections between diffuse materials**
-  - 体现在接触不到光的漫反射面反射出了接触到光的红色面的光 (color bleeding)
+    - 体现在接触不到光的漫反射面反射出了接触到光的红色面的光 (color bleeding)
 
 ![image-20221113145443800](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211131454907.png)
 
@@ -792,8 +792,8 @@ shade(p, wo)
 
 - 光线仅仅弹射两次的话数量级就已经不可以接受了
 - **Key observation**: #rays will not explode iff $N = 1$
-  - 当使用 $N = 1$ 进行 Monte Carlo Integration 时 $\to$ 路径追踪 (**path tracing**)
-  - 当使用 $N \ne 1$ 进行 Monte Carlo Integration 时 $\to$ 分布式光线追踪
+    - 当使用 $N = 1$ 进行 Monte Carlo Integration 时 $\to$ 路径追踪 (**path tracing**)
+    - 当使用 $N \ne 1$ 进行 Monte Carlo Integration 时 $\to$ 分布式光线追踪
 - 使用  $N = 1$ 进行 Monte Carlo Integration 噪声很大，但只要使用多个路径穿过一个像素对它们求平均即可
 
 修改刚刚的算法
@@ -821,12 +821,12 @@ ray_generation(camPos, pixel)
 
 - 但是在真实世界中，光线是不会停止弹射的，限制弹射次数并不合理，因为对于弹射次数的削减相当于直接削减了能量，这违背了能量守恒定律
 - **Solution: Russian Roulette (RR)** （俄罗斯轮盘赌）
-  - 在一定的概率下停止追踪，方法如下
+    - 在一定的概率下停止追踪，方法如下
     1. 假设得到的理想追踪结果为 $L_o$
     2. 人工设定一个概率 $P\ (0 < P < 1)$
     3. 以概率 $P$ shoot a ray，返回 the shading result divided by $P: L_o/ P$
     4. 以概率 $1-P$ shoot a ray，返回 the shading result is $0$
-  - 在这种情况下的期望 $E= P \times (L_o / P) + (1 - P) \times 0 = L_o$ 
+    - 在这种情况下的期望 $E= P \times (L_o / P) + (1 - P) \times 0 = L_o$ 
 
 代码如下
 
@@ -862,15 +862,15 @@ shade(p, wo)
 
 - But the rendering equation integrates on the solid angle: $L_o = \int L_i fr cos \ \mathrm{d} \omega.$ 
 
-  - Recall Monte Carlo Integration: Sample on $x$ & integrate on $x$
+    - Recall Monte Carlo Integration: Sample on $x$ & integrate on $x$
 
-  - we sample on the light, so we must integrate on the light
+    - we sample on the light, so we must integrate on the light
 
-  - 我们只要知道 $\mathrm{d} \omega$ 和 $\mathrm{d}A$ 的关系即可
+    - 我们只要知道 $\mathrm{d} \omega$ 和 $\mathrm{d}A$ 的关系即可
 
-    - Recall the alternative def. of solid angle: **Projected area on the unit sphere**
+      - Recall the alternative def. of solid angle: **Projected area on the unit sphere**
     
-    - 将 $\mathrm{d}A$ 往单位球上投影即可 ( $\mathrm{d} A \cos \theta^{\prime}$ 就是把面转到朝向中心的方向，根据立体角的定义来理解下面的式子)
+      - 将 $\mathrm{d}A$ 往单位球上投影即可 ( $\mathrm{d} A \cos \theta^{\prime}$ 就是把面转到朝向中心的方向，根据立体角的定义来理解下面的式子)
     
       
     
@@ -943,27 +943,27 @@ If the ray is not blocked in the middle
 # Some Side Notes
 
 - Previous 
-  - Ray tracing == Whitted-style ray tracing
+    - Ray tracing == Whitted-style ray tracing
 
 - Modern (my own definition) 
-  - The general solution of light transport, including 
-  - (Unidirectional & bidirectional) path tracing 
-  - Photon mapping 
-  - Metropolis light transport - VCM / UPBP…
+    - The general solution of light transport, including 
+    - (Unidirectional & bidirectional) path tracing 
+    - Photon mapping 
+    - Metropolis light transport - VCM / UPBP…
 - Uniformly sampling the hemisphere
-  - How? And in general, how to sample any function? (sampling)
+    - How? And in general, how to sample any function? (sampling)
 - Monte Carlo integration allows arbitrary pdfs
-  - What's the best choice? **(importance sampling)**
-  - 重要性采样：针对某一种特定形状进行采样
+    - What's the best choice? **(importance sampling)**
+    - 重要性采样：针对某一种特定形状进行采样
 - Do random numbers matter? 
-  - Yes! **(low discrepancy sequences)**
+    - Yes! **(low discrepancy sequences)**
 -  I can sample the hemisphere and the light 
-  - Can I combine them? Yes! **(multiple imp. sampling)** 
-  - 结合从半球和光源的采样方法
+    - Can I combine them? Yes! **(multiple imp. sampling)** 
+    - 结合从半球和光源的采样方法
 - The radiance of a pixel is the average of radiance on all paths passing through it 
-  - Why? **(pixel reconstruction filter)** 
+    - Why? **(pixel reconstruction filter)** 
 - Is the radiance of a pixel the color of a pixel? 
-  - No. **(gamma correction, curves, color space)** 
+    - No. **(gamma correction, curves, color space)** 
 
 ## Importance Sampling
 

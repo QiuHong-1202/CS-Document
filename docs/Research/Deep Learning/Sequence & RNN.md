@@ -12,8 +12,8 @@ $$
 
 
 - 对条件概率建模：给定前面的 $t-1$ 个数据去预测第 $t$ 个数据，可以用以下公式表示
-  - 对见过的数据建模，也称为**自回归模型**
-  - 目标是计算 $f(x_1, \ldots x_{t-1})$
+    - 对见过的数据建模，也称为**自回归模型**
+    - 目标是计算 $f(x_1, \ldots x_{t-1})$
 
 
 $$
@@ -28,23 +28,23 @@ $$
 ### 潜变量模型 latent variable
 
 - 引人潜变量 $h_t$ 来表示过去信息 $h_t=f\left(x_1, \ldots x_{t-1}\right)$
-  - 这样 $x_t=p\left(x_t \mid h_t\right)$
+    - 这样 $x_t=p\left(x_t \mid h_t\right)$
 
 ## 语言模型
 
 - 给定文本序列 $x_1, \ldots, x_T$，语言模型的目标是估计联合概率 $p\left(x_1, \ldots, x_T\right)$，使用统计方法时常采用 $n$ 元语法
 
 - 它的应用包括：
-  - 做预训练模型 (eg BERT, GPT-3)
-  - 生成本文, 给定前面几个词, 不断的使用 $x_t \sim p\left(x_t \mid x_1, \ldots, x_{t-1}\right)$ 来 生成后续文本
-  - 判断多个序列中哪个更常见, e.g. “to recognize speech” vs "to wreck a nice beach
+    - 做预训练模型 (eg BERT, GPT-3)
+    - 生成本文, 给定前面几个词, 不断的使用 $x_t \sim p\left(x_t \mid x_1, \ldots, x_{t-1}\right)$ 来 生成后续文本
+    - 判断多个序列中哪个更常见, e.g. “to recognize speech” vs "to wreck a nice beach
 
 ### 使用计数来建模
 
 看这个序列在文本中出现的次数，除以句子长度
 
 - 假设序列长度为 $2$ , 我们预测
-  - 这里 $n$ 是总词数, $n(x), n\left(x, x^{\prime}\right)$ 是单个单词和连续单词对的出现次数
+    - 这里 $n$ 是总词数, $n(x), n\left(x, x^{\prime}\right)$ 是单个单词和连续单词对的出现次数
 
 
 $$
@@ -92,9 +92,9 @@ $$
 - 当前时刻的输出是要去预测当前时刻的观察，输出发生在观察之前，隐变量由 $t-1$ 时刻的观察更新
 - 比较 $o_t$ 和 $x_t$ 来计算损失
 - 更新隐藏状态： $\mathbf{h}_t=\phi\left(\mathbf{W}_{h h} \mathbf{h}_{t-1}+\mathbf{W}_{h x} \mathbf{x}_{t-1}+\mathbf{b}_h\right)$
-  - $\mathbf{W}_{h h}$：表示 $h\to h$ 的更新
-  - $\mathbf{W}_{h x}$：表示 $x\to h$ 的更新
-  - 去掉 $\mathbf{W}_{h h} \mathbf{h}_{t-1}$ 就是 MLP
+    - $\mathbf{W}_{h h}$：表示 $h\to h$ 的更新
+    - $\mathbf{W}_{h x}$：表示 $x\to h$ 的更新
+    - 去掉 $\mathbf{W}_{h h} \mathbf{h}_{t-1}$ 就是 MLP
 - 输出： $\mathbf{o}_t=\phi\left(\mathbf{W}_{h o} \mathbf{h}_t+\mathbf{b}_o\right)$
 
 ### 困惑度（perplexity）
@@ -116,7 +116,7 @@ $p$ 是语言模型的预测概率, $x_t$ 是真实词
 
 - 迭代中计算这 $T$ 个时间步上的梯度, 在反向传播过程中产 生长度为 $O(T)$ 的矩阵乘法链, 导致数值不稳定
 - 梯度裁剪能有效预防梯度爆炸
-  - 如果梯度长度超过 $\theta$，那么投影回长度 $\theta$
+    - 如果梯度长度超过 $\theta$，那么投影回长度 $\theta$
 
 
 $$
@@ -131,10 +131,10 @@ $$
 ![image-20230627110624920](./assets/image-20230627110624920.png)
 
 - forget gate：删除长期记忆的过程
-  - 过滤重要特征，忽略无关信息
+    - 过滤重要特征，忽略无关信息
 - input gate：增添长期记忆的过程
-  - sigmoid：对内容进行选择
-  - tanh: 相当于对信息进行整理
+    - sigmoid：对内容进行选择
+    - tanh: 相当于对信息进行整理
 
 ![image-20230627110748935](./assets/image-20230627110748935.png)
 

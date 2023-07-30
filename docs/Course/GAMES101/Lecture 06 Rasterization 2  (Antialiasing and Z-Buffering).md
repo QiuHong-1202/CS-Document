@@ -20,11 +20,11 @@
 
 - Artifacts due to sampling - "Aliasing"
 
-  - Jaggies – sampling in space  
+    - Jaggies – sampling in space  
 
-  - Moire – under sampling images  
+    - Moire – under sampling images  
 
-  - Wagon wheel effect – sampling in time 
+    - Wagon wheel effect – sampling in time 
 
 原因：信号变化的速度太快了但采样太慢了
 
@@ -96,11 +96,11 @@
 
 - Convolution in the spatial domain is **equal to multiplication in the frequency domain**, and vice versa 
 - 作用
-  - Option 1:  Filter by convolution in the spatial domain
-  - Option 2:  
-    - Transform to frequency domain (Fourier transform)  
-    - Multiply by Fourier transform of convolution kernel  
-    - Transform back to spatial domain (inverse Fourier)
+    - Option 1:  Filter by convolution in the spatial domain
+    - Option 2:  
+      - Transform to frequency domain (Fourier transform)  
+      - Multiply by Fourier transform of convolution kernel  
+      - Transform back to spatial domain (inverse Fourier)
 
 <img src="https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208121452610.png" alt="image-20220812145253491" style="zoom: 50%;" />
 
@@ -135,7 +135,7 @@
 ### 抗锯齿的方法
 
 - 增加采样率：扩大频谱的搬移间隔
-  - 需要高分辨率显示设备
+    - 需要高分辨率显示设备
 - 先做模糊（低通滤波），再做采样
 
 ![image-20220812154601411](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208121546568.png)
@@ -144,9 +144,9 @@
 
 - **求平均**：Convolve $f(x,y)$ by a 1-pixel box-blur 
 
-  - Recall: convolving = filtering = averaging  
+    - Recall: convolving = filtering = averaging  
 
-  - 通过边界占像素的比例来觉得像素亮度从而完成模糊过程
+    - 通过边界占像素的比例来觉得像素亮度从而完成模糊过程
 
     ![image-20220812154951937](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208121549076.png)
 
@@ -187,8 +187,8 @@
 - Paint from back to front, **overwrite** in the framebuffer
 - Requires sorting in depth ($O(n \log n)$ for $n$ triangles)  
 - Can have unresolvable depth order
-  - 如果两两存在覆盖关系，就无法定义深度顺序，如下图
-  - <img src="https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208190839051.png" alt="image-20220819083933909" style="zoom:67%;" />
+    - 如果两两存在覆盖关系，就无法定义深度顺序，如下图
+    - <img src="https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208190839051.png" alt="image-20220819083933909" style="zoom:67%;" />
 
 ### Z-Buffer 深度缓存
 
@@ -198,13 +198,13 @@
 
 - 在生成图像时，同步生成两张图
 
-  - frame buffer（最后的结果） stores color values 
+    - frame buffer（最后的结果） stores color values 
 
-  - depth buffer (z-buffer 深度信息) stores depth 
+    - depth buffer (z-buffer 深度信息) stores depth 
 
 - 为了方便起见，假设
 
-  - z is always positive (smaller z $\to$ closer, larger z $\to$ further)
+    - z is always positive (smaller z $\to$ closer, larger z $\to$ further)
 
 - 深度缓存算法和顺序无关（假设没有两个三角形在任何一个像素中没有相同深度，因为三角形的坐标基本都是使用浮点型存储，基本可以认为两个三角形没有相等的深度）
 

@@ -66,7 +66,7 @@ $$
 #### Features
 
 - 对贝塞尔曲线的控制点做仿射变换（线性变换+平移）相当于对贝塞尔曲线做仿射变换
-  - 投影是不满足此性质
+    - 投影是不满足此性质
 - 贝塞尔曲线的凸包性质：画出的贝塞尔曲线一定在几个控制点形成的凸包内
 
 ### Piecewise Bézier Curves 逐段的贝塞尔曲线
@@ -104,10 +104,10 @@ Evaluating Surface Position For Parameters $(u,v)$
 
 - Mesh Subdivision (upsampling)
 - Mesh Subdivision (upsampling)
-  - Decrease resolution
-  - try to preserve shape/appearance
+    - Decrease resolution
+    - try to preserve shape/appearance
 - Mesh Regularization (same #triangles)
-  - Modify sample distribution to improve quality
+    - Modify sample distribution to improve quality
 
 ### Mesh Subdivision 细分
 
@@ -119,15 +119,15 @@ Evaluating Surface Position For Parameters $(u,v)$
 
 - 引入更多的三角形
 
-  - 连接原本三角形的三条边的中点，形成新的顶点
+    - 连接原本三角形的三条边的中点，形成新的顶点
 
 - 让三角形的位置发生一些变化，让原来的物体变得更加光滑
 
-  - 对于新的顶点
+    - 对于新的顶点
 
-  - 下图中的**白色**顶点为生成的新的顶点且被两个原三角形共享，认为 $A,B$ 两点是距离白色点较近的两个点，$C,D$ 两点是距离白色点较远的两个点，实质是一种加权平均，使得新出现的白点可以达到平滑的效果
+    - 下图中的**白色**顶点为生成的新的顶点且被两个原三角形共享，认为 $A,B$ 两点是距离白色点较近的两个点，$C,D$ 两点是距离白色点较远的两个点，实质是一种加权平均，使得新出现的白点可以达到平滑的效果
 
-  - Loop Subdivision 算法将白色顶点的坐标调整为 
+    - Loop Subdivision 算法将白色顶点的坐标调整为 
     
     
     $$
@@ -140,15 +140,15 @@ Evaluating Surface Position For Parameters $(u,v)$
 
   
 
-  - 对于旧的顶点（虚线表示拆出的新三角形，老的顶点是中间的**白色**点）
+    - 对于旧的顶点（虚线表示拆出的新三角形，老的顶点是中间的**白色**点）
 
-  - Loop Subdivision 算法使得调整后的新顶点，一部分相信老的顶点的平均值，一部分受新的顶点的影响
+    - Loop Subdivision 算法使得调整后的新顶点，一部分相信老的顶点的平均值，一部分受新的顶点的影响
   
-  - 定义 $n$ 为白色顶点的度，下图中 $n=6$
+    - 定义 $n$ 为白色顶点的度，下图中 $n=6$
   
-  - 定义 $u$ 为与 $n$ 有关系的一个数。当 $n=3$ 时，$u=\frac{3}{16}$，当 $n\ne 3$ 时，$u = \frac{3}{8n}$
+    - 定义 $u$ 为与 $n$ 有关系的一个数。当 $n=3$ 时，$u=\frac{3}{16}$，当 $n\ne 3$ 时，$u = \frac{3}{8n}$
   
-  - Loop Subdivision 算法将白色顶点的坐标调整为 （可以这么理解，如果一个顶点连了很多三角形，说明这个顶点可以由别人来决定，如果一个顶点连接的三角形数目很少，说明这个顶点自身比较重要，要更多的相信自己的信息）
+    - Loop Subdivision 算法将白色顶点的坐标调整为 （可以这么理解，如果一个顶点连了很多三角形，说明这个顶点可以由别人来决定，如果一个顶点连接的三角形数目很少，说明这个顶点自身比较重要，要更多的相信自己的信息）
     
     
     $$
@@ -227,11 +227,11 @@ $$
 - 找到一条边，把连接这两条边的顶点变成一个顶点（捏起来）
 - 使用 Quadric Error Metrics（二次误差度量）来确定坍缩的边
 - Quadric error: new vertex should minimize its sum of square distance (L2 distance) to previously related triangle planes
-  - 找到一个最优的位置，使得这个点到它原本的面的距离平方和最小
+    - 找到一个最优的位置，使得这个点到它原本的面的距离平方和最小
 - 选择最优的边：优先队列
-  - 选取二次度量误差最小的边
-  - 合并这个边
-  - 更新所有受这个边影响的边
+    - 选取二次度量误差最小的边
+    - 合并这个边
+    - 更新所有受这个边影响的边
 
 ![image-20221025120211948](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210251202980.png)
 
@@ -250,8 +250,8 @@ $$
 ![image-20221025121205558](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210251423947.png)
 
 - Pass 2B: Project to light：把摄像机上看到的点投影回光源
-  - 如果这个点反投影回光源的深度和光源一致，说明这个点对光源可见（橙色线）
-  - 如果不一致，说明这个点是阴影（红色线）
+    - 如果这个点反投影回光源的深度和光源一致，说明这个点对光源可见（橙色线）
+    - 如果不一致，说明这个点是阴影（红色线）
 
 ![image-20221025142530461](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210251425486.png)
 
@@ -268,8 +268,8 @@ $$
 
 - 硬阴影：阴影的边界锐利
 - 软阴影：边界不清晰，过渡明显
-  - 本影：一个位置完全看不到光源
-  - 半影：一个位置可以部分看到光源
-  - 对于点光源不可能出现软阴影，软阴影一定是光源具有一定大小造成的现象
+    - 本影：一个位置完全看不到光源
+    - 半影：一个位置可以部分看到光源
+    - 对于点光源不可能出现软阴影，软阴影一定是光源具有一定大小造成的现象
 
 ![image-20221025144020950](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202210251440001.png)

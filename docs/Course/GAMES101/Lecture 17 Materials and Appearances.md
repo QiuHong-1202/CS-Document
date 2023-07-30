@@ -79,8 +79,8 @@ $$
 
 - 也叫折射定律
 - Transmitted angle depends on
-  - index of refraction (IOR) for incident ray
-  - index of refraction (IOR) for exiting ray
+    - index of refraction (IOR) for incident ray
+    - index of refraction (IOR) for exiting ray
 
 ![image-20221119205232326](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192052359.png)
 
@@ -121,7 +121,7 @@ $$
 
 - Approximate: Schlick’s approximation
 
-  - 对刚刚的精确公式拟合一个曲线，设基准反射率为 $R_0$
+    - 对刚刚的精确公式拟合一个曲线，设基准反射率为 $R_0$
 
     
 
@@ -161,7 +161,7 @@ Individual elements of surface act like **mirrors** （每一个微表面可以�
 
 - $F(i,h)$: 表示菲涅尔项，总共有多少能量被反射
 - $G(i,o,h)$: 几何项，微表面可能互相遮挡（自己给自己的阴影）导致有一些微表面失去了它的作用
-  - 光方向与物体表面几乎平行的时候最明显，Grazing Angel
+    - 光方向与物体表面几乎平行的时候最明显，Grazing Angel
 - $D(h)$: 表示微表面的法线分布，因为每一个微表面都可以认为是镜面，只有半程向量和法线垂直的微表面能够将光反射到出射方向
 
 ### Isotropic / Anisotropic Materials (BRDFs)
@@ -170,9 +170,9 @@ Individual elements of surface act like **mirrors** （每一个微表面可以�
 
 - Anisotropic 各向异性：微表面存在方向性
 
-  - 识别：BRDF 在方位上旋转得到相同的 BRDF
+    - 识别：BRDF 在方位上旋转得到相同的 BRDF
 
-  - Reflection depends on azimuthal angle $\phi$
+    - Reflection depends on azimuthal angle $\phi$
     
     
     $$
@@ -180,7 +180,7 @@ Individual elements of surface act like **mirrors** （每一个微表面可以�
     $$
     
     
-  - Example
+    - Example
   
     ![image-20221119233620355](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192336436.png)
 
@@ -220,7 +220,7 @@ $$
 ![image-20221119234139136](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211192341164.png)
 
 - Energy conservation 能量守恒
-  - 在 Path Tracing 时经过无限次的光线弹射，最后的光线收敛就是因为能量守恒
+    - 在 Path Tracing 时经过无限次的光线弹射，最后的光线收敛就是因为能量守恒
   
     
 
@@ -232,13 +232,13 @@ $$
 
 - Isotropic vs. anisotropic
 
-  - If isotropic, $f_r\left(\theta_i, \phi_i ; \theta_r, \phi_r\right)=f_r\left(\theta_i, \theta_r, \phi_r-\phi_i\right)$
+    - If isotropic, $f_r\left(\theta_i, \phi_i ; \theta_r, \phi_r\right)=f_r\left(\theta_i, \theta_r, \phi_r-\phi_i\right)$
 
-    - 各向同性意味着 BRDF 之和相对的方位角有关，实际上此时 $f_r$ 为三维
+      - 各向同性意味着 BRDF 之和相对的方位角有关，实际上此时 $f_r$ 为三维
 
-  - Then, from reciprocity,
+    - Then, from reciprocity,
 
-    - 相对的方位角不用考虑正负 $\to$ BRDF 的测量与储存
+      - 相对的方位角不用考虑正负 $\to$ BRDF 的测量与储存
 
       
     
@@ -283,7 +283,7 @@ Improving efficiency:
 ### Challenges in Measuring BRDFs
 
 - Accurate measurements at grazing angles
-  - Important due to Fresnel effects
+    - Important due to Fresnel effects
 - Measuring with dense enough sampling to capture high frequency specularities
 - Retro-reflection
 - Spatially-varying reflectance, ...

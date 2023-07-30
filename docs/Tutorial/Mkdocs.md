@@ -97,15 +97,15 @@ python -m mkdocs gh-deploy --config-file ../CS-Document/mkdocs.yml --remote-bran
 ## Debug
 
 - `"git-revision-date-localized"` plugin is not installed
-  - 安装下列包:  `pip install mkdocs-git-revision-date-localized-plugin`
+    - 安装下列包:  `pip install mkdocs-git-revision-date-localized-plugin`
 
 - LaTeX 无法换行：这是 MathJax 的 bug，现有的解决方法是在公式块中使用 `\displaylines{}`
 
 - 无序标题不支持多层嵌套：需要安装额外插件并启用
 
-  - `pip install mdx_truly_sane_lists`
+    - `pip install mdx_truly_sane_lists`
   
-  - 在 `mkdoc.yml` 的 `markdown_extensions` 添加 `mdx_truly_sane_lists` 
+    - 在 `mkdoc.yml` 的 `markdown_extensions` 添加 `mdx_truly_sane_lists` 
 
 
 

@@ -5,38 +5,38 @@
 ### Advanced Light Transport
 
 - Unbiased light transport methods
-  - Bidirectional path tracing (BDPT)
-  - Metropolis light transport (MLT)
+    - Bidirectional path tracing (BDPT)
+    - Metropolis light transport (MLT)
 - Biased light transport methods
-  - Photon mapping
-  - Vertex connection and merging (VCM)
+    - Photon mapping
+    - Vertex connection and merging (VCM)
 - Instant radiosity (VPL / many light methods)
 
 ### Biased vs. Unbiased Monte Carlo Estimators
 
 - An **unbiased** Monte Carlo technique does not have any systematic error
-  - The expected value of an unbiased estimator will always be the correct value, no matter how many samples are used
-  - 估计出的结果的期望永远都是我们要的真实值
+    - The expected value of an unbiased estimator will always be the correct value, no matter how many samples are used
+    - 估计出的结果的期望永远都是我们要的真实值
 - Otherwise, **biased**
-  - One **special case**, the expected value converges to the correct value as infinite \#samples are used - **consistent**
-  - 估计出的结果的期望和真实值不同
+    - One **special case**, the expected value converges to the correct value as infinite \#samples are used - **consistent**
+    - 估计出的结果的期望和真实值不同
 - An easier understanding bias in rendering 
-  - **Biased** == blurry 
-  - **Consistent** == not blurry with infinite #samples
+    - **Biased** == blurry 
+    - **Consistent** == not blurry with infinite #samples
 
 ### Bidirectional Path Tracing (BDPT)
 
 - Name: 双向路径追踪
 - Recall: a path connects the camera and the light （生成一些半路径）
-  - Traces sub-paths from both the camera and the light 
-  - Connects the end points from both sub-paths
+    - Traces sub-paths from both the camera and the light 
+    - Connects the end points from both sub-paths
 
 - Pros
-  - Suitable if the light transport is complex on the light’s side
-  - unbiased
+    - Suitable if the light transport is complex on the light’s side
+    - unbiased
 - Cons
-  - **Difficult to implement** 
-  - quite **slow**
+    - **Difficult to implement** 
+    - quite **slow**
 
 ![image-20221121154154021](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211542157.png)
 
@@ -47,21 +47,21 @@
 
 - 思想：使用统计学上的马克可夫链（根据当前的样本生成一个和它靠近的下一个样本）做采样工具
 - A Markov Chain Monte Carlo (MCMC) application 
-  - Jumping from the current sample to the next with some PDF 
+    - Jumping from the current sample to the next with some PDF 
 - Very good at **locally** exploring difficult light paths
 - Key idea: Locally **perturb an existing path to get a new path**
 
 ![image-20221121154954427](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211549456.png)
 
 - Pros
-  - Works great with difficult light paths 
-    - 找到一条光线作为种子，可以在它周围找到其他的光线
-  - unbiased
+    - Works great with difficult light paths 
+      - 找到一条光线作为种子，可以在它周围找到其他的光线
+    - unbiased
 - Cons
-  - Difficult to estimate the convergence rate （收敛速率，也就是渲染速度难以分析）
-  - Does not guarantee equal convergence rate per pixel 
-    -  usually produces “dirty” results
-    - usually not used to render animations
+    - Difficult to estimate the convergence rate （收敛速率，也就是渲染速度难以分析）
+    - Does not guarantee equal convergence rate per pixel 
+      -  usually produces “dirty” results
+      - usually not used to render animations
 
 ![image-20221121155254390](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211552474.png)
 
@@ -71,21 +71,21 @@
 
 - A biased approach & A two-stage method 
 - Very good at handling **Specular-Diffuse-Specular (SDS) paths** and generating caustics
-  - caustics: 由于光线的聚焦产生的非常强的一些图案，例如水面的波纹
+    - caustics: 由于光线的聚焦产生的非常强的一些图案，例如水面的波纹
 
 #### Approach (variations apply)
 
 - Stage 1 — photon tracing
-  - Emitting photons from the light source, bouncing them around, then recording photons on diffuse surfaces（当光子打到 diffuse 的物体后停下）
+    - Emitting photons from the light source, bouncing them around, then recording photons on diffuse surfaces（当光子打到 diffuse 的物体后停下）
 
 ![image-20221121160259096](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211602119.png)
 
 - Stage 2 — photon collection (final gathering)
-  - Shoot **sub-paths** from the camera, bouncing them around, until they hit diffuse surfaces （当 sub-paths 打到 diffuse 的物体后停下）
+    - Shoot **sub-paths** from the camera, bouncing them around, until they hit diffuse surfaces （当 sub-paths 打到 diffuse 的物体后停下）
 - Calculation — local density estimation
-  - Idea: areas with more photons should be brighter 
-  - For **each shading point**, find the nearest $N$ photons. Take the **surface area** they over
-  - 计算光子的密度
+    - Idea: areas with more photons should be brighter 
+    - For **each shading point**, find the nearest $N$ photons. Take the **surface area** they over
+    - 计算光子的密度
 
 ![image-20221121160134287](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211601318.png)
 
@@ -93,16 +93,16 @@
 
 - Local Density estimation $dN / dA \ne ΔN / ΔA$
 - But in the sense of limit
-  - More photons emitted $\to$ the same $N$ photons covers a smaller $ΔA$ $\to$ $ΔA$ is closer to $dA$ （So, biased but consistent!）
+    - More photons emitted $\to$ the same $N$ photons covers a smaller $ΔA$ $\to$ $ΔA$ is closer to $dA$ （So, biased but consistent!）
 - Why not do a “const range” search for density estimation?
-  - More photons emitted $\to$ in the same const range will have more photons $\to$ $ΔA$ is not closer to $dA$ （So, biased and not consistent!）
+    - More photons emitted $\to$ in the same const range will have more photons $\to$ $ΔA$ is not closer to $dA$ （So, biased and not consistent!）
 
 ### Vertex Connection and Merging
 
 - 结合双向路径追踪和光子映射
 - Key idea
-  - Let’s not waste the sub-paths in BDPT if their end points cannot be connected but can be merged
-  - Use photon mapping to handle the merging of nearby “photons”
+    - Let’s not waste the sub-paths in BDPT if their end points cannot be connected but can be merged
+    - Use photon mapping to handle the merging of nearby “photons”
 
 ![image-20221121161242955](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211612981.png)
 
@@ -110,29 +110,29 @@
 
 - Sometimes also called many-light approaches
 - Key idea
-  - Lit surfaces can be treated as light sources（已经被照亮的面也可以被认为是光源，生成 VPL 之后，使用直接光照就行）
+    - Lit surfaces can be treated as light sources（已经被照亮的面也可以被认为是光源，生成 VPL 之后，使用直接光照就行）
 - Approach
-  - Shoot light sub-paths and assume the end point of each sub-path is a Virtual Point Light (VPL) 
-  - Render the scene as usual using these VPLs
+    - Shoot light sub-paths and assume the end point of each sub-path is a Virtual Point Light (VPL) 
+    - Render the scene as usual using these VPLs
 
 ![image-20221121161511303](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211615339.png)
 
 - Pros: fast and usually gives good results on diffuse scenes
 - Cons
-  - Spikes will emerge when VPLs are close to shading points （在窄的缝隙和接缝出有问题）
-  - Cannot handle glossy materials
+    - Spikes will emerge when VPLs are close to shading points （在窄的缝隙和接缝出有问题）
+    - Cannot handle glossy materials
 
 ## Advanced Appearance Modeling
 
 - Non-surface models 
-  - Participating media 
-  - Hair / fur / fiber (BCSDF) 
-  - Granular material 
+    - Participating media 
+    - Hair / fur / fiber (BCSDF) 
+    - Granular material 
 
 - Surface models
-  - Translucent material (BSSRDF)
-  - Cloth
-  - Detailed material (non-statistical BRDF) 
+    - Translucent material (BSSRDF)
+    - Cloth
+    - Detailed material (non-statistical BRDF) 
 - Procedural appearance
 
 ### Non-Surface Models
@@ -140,13 +140,13 @@
 #### Participating Media
 
 - Participating Media（散射介质）: Fog, Cloud, Hair(考虑光线和一根曲线的作用)
-  - 不在表面上而是在空间中
+    - 不在表面上而是在空间中
 - At any point as light travels through a participating medium, it can be **(partially) absorbed** and **scattered**.
 
 ![image-20221121162149763](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211621790.png)
 
 - Use **Phase Function** to describe the angular distribution of light scattering at any point x within participating media
-  - 决定光线如何散射
+    - 决定光线如何散射
 
 ![image-20221121162320284](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211623310.png)
 
@@ -171,9 +171,9 @@
 ##### Marschner Model
 
 - 考虑三种光线与头发圆柱的作用
-  - R: 光线被头发表面反射
-  - TT: 光线进入头发从头发另一侧折射出
-  - TRT: 光线从头发底面被反射，从入射一侧折射出
+    - R: 光线被头发表面反射
+    - TT: 光线进入头发从头发另一侧折射出
+    - TRT: 光线从头发底面被反射，从入射一侧折射出
 
 ![image-20221121163030225](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211630253.png)
 
@@ -260,19 +260,19 @@ $$
 ![image-20221121165424080](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211654140.png)
 
 - Render as Surface
-  - Given the weaving pattern, calculate the overall behavior
-  - Render using a BRDF 
+    - Given the weaving pattern, calculate the overall behavior
+    - Render using a BRDF 
 
 ![image-20221121165721165](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211657282.png)
 
 - Render as Participating Media
-  - Properties of individual fibers & their distribution $\to$ scattering parameters 
-  - Render as a participating medium
+    - Properties of individual fibers & their distribution $\to$ scattering parameters 
+    - Render as a participating medium
 
 ![image-20221121165705878](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211657900.png)
 
 - Render as Actual Fibers
-  - Render every fiber explicitly! 
+    - Render every fiber explicitly! 
 
 ![image-20221121165825429](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2022/202211211658650.png)
 
@@ -311,5 +311,5 @@ $$
 
 - 定义三维的纹理：$f(x,y,z)$ 查询得到纹理
 - define details without textures
-  - Compute a noise function on the fly
-  - 3D noise $\to$ internal structure if cut or broken
+    - Compute a noise function on the fly
+    - 3D noise $\to$ internal structure if cut or broken

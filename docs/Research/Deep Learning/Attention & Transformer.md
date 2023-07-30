@@ -3,25 +3,25 @@
 ## Attention Mechanism
 
 - 注意力机制的心理学框架：人类根据随意线索和不随意线索来选择注意点
-  - 随意线索：根据人类主观想法的事物（想读书）
-  - 不随意线索：不根据人类主观想法的线索（眼睛注意到的红色杯子）
+    - 随意线索：根据人类主观想法的事物（想读书）
+    - 不随意线索：不根据人类主观想法的线索（眼睛注意到的红色杯子）
 - 卷积、全连接、池化都只考虑不随意线索
 - 注意力机制则**显式的**考虑随意线索
-  - 随意线索被称之为查询（query）
-  - 每一个输入是一个值（value）和不随意线索（key）的对
-  - 通过注意力池化层根据 ***query*** 来有偏向性的选择某些输入
-  - 可以一般的写作 $f(x)=\sum_i \alpha(x, x_i) y_i$, 这里 $\alpha\left(x, x_i\right)$ 是注意力权重
+    - 随意线索被称之为查询（query）
+    - 每一个输入是一个值（value）和不随意线索（key）的对
+    - 通过注意力池化层根据 ***query*** 来有偏向性的选择某些输入
+    - 可以一般的写作 $f(x)=\sum_i \alpha(x, x_i) y_i$, 这里 $\alpha\left(x, x_i\right)$ 是注意力权重
 
 ### 非参注意力池化层
 
 - 给定数据 $(x_i,y_i), i=1,...,n$
 - 平均池化（$x$ 为 query）：$f(x)=\frac{1}{n}\sum_iy_i$
 - Nadaraya-Watson 核回归：
-  - $x$ 为 query
-  - $x_i, x_j$ 为 key
-  - $y_i$ 为 value
-  - $K(x-x_i)$ 为核（kernel），衡量 $x$ 和 $x_i$ 之间距离的函数，会选择和离 $x$ 比较近的 $x_i$
-  - 变成概率后每一项 $y_i$ 就是它的相对重要性
+    - $x$ 为 query
+    - $x_i, x_j$ 为 key
+    - $y_i$ 为 value
+    - $K(x-x_i)$ 为核（kernel），衡量 $x$ 和 $x_i$ 之间距离的函数，会选择和离 $x$ 比较近的 $x_i$
+    - 变成概率后每一项 $y_i$ 就是它的相对重要性
 
 
 $$
@@ -111,9 +111,9 @@ $$
 
 
 - 向量化版本
-  - $\mathbf{Q} \in \mathbb{R}^{n \times d}, \mathbf{K} \in \mathbb{R}^{m \times d}, \mathbf{V} \in \mathbb{R}^{m \times v}$
-  - 注意力分数: $a(\mathbf{Q}, \mathbf{K})=\mathbf{Q}\mathbf{K}^T / \sqrt{d} \in \mathbb{R}^{n \times m}$
-  - 注意力池化: $f=\operatorname{softmax}(a(\mathbf{Q}, \mathbf{K})) \mathbf{V} \in \mathbb{R}^{n \times v}$
+    - $\mathbf{Q} \in \mathbb{R}^{n \times d}, \mathbf{K} \in \mathbb{R}^{m \times d}, \mathbf{V} \in \mathbb{R}^{m \times v}$
+    - 注意力分数: $a(\mathbf{Q}, \mathbf{K})=\mathbf{Q}\mathbf{K}^T / \sqrt{d} \in \mathbb{R}^{n \times m}$
+    - 注意力池化: $f=\operatorname{softmax}(a(\mathbf{Q}, \mathbf{K})) \mathbf{V} \in \mathbb{R}^{n \times v}$
 
 ## Transfomer
 
@@ -144,16 +144,16 @@ $$
 - 自注意力机制没有记录位置信息
 - 加入位置信息方法：位置编码
 - 位置编码将位置信息注入到输入中（不在模型中加），让输入的内容具有位置信息
-  - 假设长度为 $n$ 的序列是 $\mathbf{X} \in \mathbb{R}^{n \times d}$ ，那么使用位置编码矩阵 $\mathbf{P} \in \mathbb{R}^{n \times d}$ 来输出 $\mathbf{X}+\mathbf{P}$ 作为自编码输入
-  - $\mathbf{P}$ 的元素如下计算（偶数行和奇数行的区别）：$p_{i, 2 j}=\sin \left(\frac{i}{10000^{2 j / d}}\right), \quad p_{i, 2 j+1}=\cos \left(\frac{i}{10000^{2 j / d}}\right)$
-  - 使用正弦和余弦函数的好处：编码的是相对的位置信息
+    - 假设长度为 $n$ 的序列是 $\mathbf{X} \in \mathbb{R}^{n \times d}$ ，那么使用位置编码矩阵 $\mathbf{P} \in \mathbb{R}^{n \times d}$ 来输出 $\mathbf{X}+\mathbf{P}$ 作为自编码输入
+    - $\mathbf{P}$ 的元素如下计算（偶数行和奇数行的区别）：$p_{i, 2 j}=\sin \left(\frac{i}{10000^{2 j / d}}\right), \quad p_{i, 2 j+1}=\cos \left(\frac{i}{10000^{2 j / d}}\right)$
+    - 使用正弦和余弦函数的好处：编码的是相对的位置信息
 
 ### 多头注意力 Multihead-Attention
 
 - 对同一key, value, query, 希望抽取不同的信息
-  - 例如短距离关系和长距离关系
+    - 例如短距离关系和长距离关系
 - 多头注意力使用 $h$ 个独立的注意力池化
-  - 合并各个头 (head) 输出得到最终输出
+    - 合并各个头 (head) 输出得到最终输出
 
 ![../_images/multi-head-attention.svg](https://zh.d2l.ai/_images/multi-head-attention.svg)
 
@@ -190,18 +190,18 @@ $$
 
 - 其实就是全连接层，$b$ 是 batch size，$n$ 是序列长度，$d$ 是维度
 - 对序列中的每个元素做全连接，把序列中的每一个 $x_i$ 当作一个样本，网络做如下操作
-  - 将输入形状由 $(b, n, d)$ 变换成 $(b n, d)$ 
-  - 作用两个全连接层
-  - 输出形状由 $(b n, d)$ 变化回 $(b, n, d)$
+    - 将输入形状由 $(b, n, d)$ 变换成 $(b n, d)$ 
+    - 作用两个全连接层
+    - 输出形状由 $(b n, d)$ 变化回 $(b, n, d)$
 - 等价于两层核窗口为 1 的一维卷积层
 
 ### 层归一化
 
 - 批量归一化（batch norm）对每个特征/通道里元素进行归一化
-  - batch norm 是对所有句子的所有词的某一特征做归一化
-  - 不适合序列长度会变的 NLP 应用
+    - batch norm 是对所有句子的所有词的某一特征做归一化
+    - 不适合序列长度会变的 NLP 应用
 - 层归一化（layer norm）对每个样本里的元素进行归一化
-    - layer norm 是对一个句子的所有词的所有特征做归一化
+      - layer norm 是对一个句子的所有词的所有特征做归一化
 
 
 
@@ -214,14 +214,14 @@ $$
 
 - 对于编码器中的输出 $\mathbf{y}_1, \ldots, \mathbf{y}_n$
 - 将其作为解码中第 $i$ 个Transformer块中多头注意力的key和value
-  - 它的 query 来自目标序列
-  - 之前的两个 Multi-head attention 采用的是自注意力 
+    - 它的 query 来自目标序列
+    - 之前的两个 Multi-head attention 采用的是自注意力 
 - 意味着编码器和解码器中块的个数和输出维度都是一样的
 
 ### 预测
 
 - 预测第 $t+1$ 个输出时
 - 解码器中输入前 $t$ 个预测值
-  - 在自注意力中, 前 $t$ 个预测值作为 key 和 value, 第 $t$ 个预测值还作为 query，输出第 $t+1$ 时刻的预测
+    - 在自注意力中, 前 $t$ 个预测值作为 key 和 value, 第 $t$ 个预测值还作为 query，输出第 $t+1$ 时刻的预测
 
 ![image-20230608144358885](./assets/image-20230608144358885.png)

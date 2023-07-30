@@ -83,7 +83,7 @@ $$
 
 - 2D 坐标：$(x,y,1)^T$
 - 2D 向量：$(x,y,0)^T$
-  - 由于向量具有平移不变性，第3维的0保护了向量不会因为平移而改变
+    - 由于向量具有平移不变性，第3维的0保护了向量不会因为平移而改变
 
 ### 齐次坐标下向量和点的操作
 
@@ -181,7 +181,7 @@ $$
 - 3D point $=(x, y, z, 1)^{T}$
 - 3D vector $=(x, y, z, 0)^{T}$
 - In general, $(x, y, z, w)(w \ne0)$ is the 3D point: $(x / w, y / w, z / w)$
-  - e.g. $(1, 0, 0, 1)$ and $(2, 0, 0, 2)$ both represent $(1, 0, 0)$ 
+    - e.g. $(1, 0, 0, 1)$ and $(2, 0, 0, 2)$ both represent $(1, 0, 0)$ 
 - 先应用线性变换再应用平移变换
 
 Use $4 \times 4$ matrices for affine transformations
@@ -271,8 +271,8 @@ $$
 
 
 - 所有的 3D 变换都可以被描述为在 $x,y,z$ 轴上的旋转
-  - 也叫欧拉角
-  - Often used in flight simulators: roll, pitch, yaw
+    - 也叫欧拉角
+    - Often used in flight simulators: roll, pitch, yaw
 
 $$
 \mathbf{R}_{x y z}(\alpha, \beta, \gamma)=\mathbf{R}_{x}(\alpha) \mathbf{R}_{y}(\beta) \mathbf{R}_{z}(\gamma)
@@ -316,7 +316,7 @@ Think about how to take a photo
 #### 正则立方体
 
 - map a cuboid $[l, r] \times [b, t] \times [f, n]$ to  the “canonical (正则、规范、标准)” cube $[-1, 1]^3$
-  - 因为是朝着 $z$ 轴负方向看，所以坐标小的是更远的 $f$ ，坐标大的是更近的 $n$
+    - 因为是朝着 $z$ 轴负方向看，所以坐标小的是更远的 $f$ ，坐标大的是更近的 $n$
 
 ![image-20220807173325041](https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208071733145.png)
 
@@ -346,10 +346,10 @@ $$
 #### 透视投影的步骤
 
 - First “squish” the frustum into a cuboid $(n \to n, f \to f) (M_{persp\to ortho})$ （将远平面挤压为与近平面相同的大小）
-  - 挤压规则
-    - 近平面永远不变，任何点在近平面上不变
-    - 远平面 $z$ 值不变，任何远平面上的点 $z$ 值不变
-    - 远平面的中心不变
+    - 挤压规则
+      - 近平面永远不变，任何点在近平面上不变
+      - 远平面 $z$ 值不变，任何远平面上的点 $z$ 值不变
+      - 远平面的中心不变
 - Do orthographic projection ($M_{ortho}$) （做正则投影）
 
 <img src="https://cdn.jsdelivr.net/gh/QiuHong-1202/FigureBed/2021/202208071749313.png" alt="image-20220807174933191" style="zoom:33%;" />

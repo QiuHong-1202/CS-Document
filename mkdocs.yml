@@ -64,7 +64,8 @@ markdown_extensions:
       # preview: false
       # inline_syntax: ['dollar']
       # block_syntax: ['dollar']
-  - mdx_truly_sane_lists 
+  # 在 tab 空格数为 2 时启用，mkdocs 默认支持的 tab 无序列表为 4 个空格
+  # - mdx_truly_sane_lists 
 
 plugins:
   - search

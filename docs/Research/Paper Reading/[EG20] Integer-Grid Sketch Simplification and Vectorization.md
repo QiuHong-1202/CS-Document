@@ -2,17 +2,17 @@
 
 - sketch vectorization: convert a bitmap line drawing into a compact set of parametric curves
 - challenges:
-  - over-sketching
-  - junctions 交叉
-  - noise
+    - over-sketching
+    - junctions 交叉
+    - noise
 - existing methods: use 2 steps
-  - segment the drawing into individual curves
-  - fit a parametric spline on each curve
+    - segment the drawing into individual curves
+    - fit a parametric spline on each curve
 
 - Cons of others method: can not deal with the condition of parallel sketch(merge)
-  - A possible fix: use the preprocess method (deep network)
-    - Break the topology
-    - Fail to merge some of strokes
+    - A possible fix: use the preprocess method (deep network)
+      - Break the topology
+      - Fail to merge some of strokes
 
 
 ![image-20230718100949621](./assets/image-20230718100949621.png)
@@ -51,8 +51,8 @@
 - identify stroke pixels by thresholding the input image
 - discretize the image space via a triangulation that we compute using TRIANGLE [She96].
 - define a narrow band by selecting triangles with a barycenter at a distance less than $\beta \omega$ from a stroke pixel.
-  - $\omega$ : average stroke width
-  - $\beta$ : resolution-independent ( $0.0 \sim 0.3$ for clean input, $0,5 \sim 1.2$ for over-sketched input)
+    - $\omega$ : average stroke width
+    - $\beta$ : resolution-independent ( $0.0 \sim 0.3$ for clean input, $0,5 \sim 1.2$ for over-sketched input)
 
 ![image-20230718174540698](./assets/image-20230718174540698.png)
 
@@ -62,7 +62,7 @@
 
 - Compute a frame field representing the two dominant directions at each point in the vicinity of the drawing
 - Frame field computation using energy formulation proposed by Bessmeltsev and Solomon
-  - combines three terms responsible for aligning the frame field with the strokes of the drawing, smoothing the frame field away from the strokes, and a regularizer encouraging the frame field to form orthogonal crosses rather than to collapse to a line field.
+    - combines three terms responsible for aligning the frame field with the strokes of the drawing, smoothing the frame field away from the strokes, and a regularizer encouraging the frame field to form orthogonal crosses rather than to collapse to a line field.
 
 ### Parametrization
 
@@ -103,10 +103,10 @@ E_{\text {snap }}=\sum_{c \in \mathcal{C}_{\mathrm{c}}} w_{\text {snap }}\|u-\ba
 $$
 
 - Choose Tangent Direction
-  - trace the streamlines in each of the two frame field directions
-  - count the number of black pixels encountered by each streamline
-  - direction with more black pixels is the tangent direction
-  - Note: black dots correspond to cases when the two pixel counts are very close, in which cas we leave the triangle unlabelled and we don't use it for snapping
+    - trace the streamlines in each of the two frame field directions
+    - count the number of black pixels encountered by each streamline
+    - direction with more black pixels is the tangent direction
+    - Note: black dots correspond to cases when the two pixel counts are very close, in which cas we leave the triangle unlabelled and we don't use it for snapping
 
 ![image-20230718175024482](./assets/image-20230718175024482.png)
 
