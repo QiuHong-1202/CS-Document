@@ -1,4 +1,4 @@
-# Abstraction
+# Abstraction & CAD
 
 - key words: shape deformation, abstraction, clip art, reconstruction, representation, interlocking, design, assisted design
 - labs link
@@ -6,8 +6,7 @@
     - [EPFL](https://www.epfl.ch/labs/gcm/publications/)
     - [NTHU CGV LAB](https://cgv.cs.nthu.edu.tw/home)
     - [HaoZhang](https://www.cs.sfu.ca/~haoz/papers_by_cat.html)
-    
-- EG Tutorial: [Computational Assemblies: Analysis, Design, and Fabrication](https://sutd-cgl.github.io/supp/Publication/papers/2022-EG-AssemblyTutorial.pdf)
+
 
 ## Design Metric
 
@@ -67,17 +66,30 @@
 
 ## CAD Art & Computational Assemblies
 
-### Interlocking Puzzle
+### Interlocking
+
+> 互锁和互锁拼图
 
 - `[SIG22]` Computational Design of High-level Interlocking Puzzles ***(SIGGRAPH Technical Papers Award Honorable Mention)***
     - abstract: a computational approach to design high-level interlocking puzzles
     - page: https://sutd-cgl.github.io/supp/Publication/projects/2022-SIGGRAPH-High-LevelPuzzle/index.html
     - code: https://github.com/Linsanity81/High-LevelPuzzle
 
+- `[SIGA19]` Design and Structural Optimization of Topological Interlocking Assemblies
+    - page: https://kiki007.github.io/publication/topological_interlocking/
+
+- `[SIGA18]` DESIA: A General Framework for Designing Interlocking Assemblies
+    - page: https://kiki007.github.io/publication/desia/
+- `[SIGA12]` Recursive Interlocking Puzzles
+    - abstract: implement using Lego
+    - page: http://www.cse.cuhk.edu.hk/~cwfu/papers/recurpuzzle/index.htm
+
 ### Dissection Puzzles
 
+> 分割拼图
+
 - `[EG19]` Computational Design of Steady 3D Dissection Puzzles
-    - abstract: Aim at computationally designing steady 3D dissection puzzles.
+    - abstract: Aim at computationally designing steady 3D dissection puzzles
     - paper: https://sutd-cgl.github.io/supp/Publication/papers/2019-EG-3DDissection.pdf
     - video: https://youtu.be/8UhUZh9fEMg
 
@@ -85,12 +97,9 @@
 
 
 - `[SIGA19]` Computational LEGO Technic Design
-  
     - abstract: automatically compute LEGO Technic models from user input sketches
-    - paper: https://arxiv.org/abs/2007.02245
-    
+    - paper: https://arxiv.org/abs/2007.02245 
 - `[SIGA15]` Legolization: Optimizing LEGO Designs
-
     - abstract: a layout refinement algorithm, iteratively improve the weak portion of structure, generate LEGO structure from 3D model
     - paper: http://www.cs.columbia.edu/~yonghao/siga15/luo-Legolization.pdf
 
@@ -114,12 +123,10 @@
 - `[SIG22]` As-Locally-Uniform-As-Possible Reshaping of Vector Clip-Art
     - abstract: clip art reshape
     - page: https://www.cs.ubc.ca/labs/imager/tr/2022/ALUP/
-
 - `[SIG17]` Sketch-Based Implicit Blending
     - abstract: deform of shape
     - paper: https://taiya.github.io/pubs/angles2017sketch.pdf
     - video: https://www.youtube.com/watch?v=5lah1kdp-P8
-
 - `[SIG18]` Full 3D Reconstruction of Transparent Objects
     - page: https://vcc.szu.edu.cn/research/2018/FRT
 - `[SIGA18]` Construction and Fabrication of Reversible Shape Transforms
@@ -142,3 +149,4 @@
 - `[SIG07]` Plushie: An Interactive Design System for Plush Toys
     - abstract: 3D 模型制造毛绒玩具
     - paper: https://www.is.ocha.ac.jp/~yuki/papers/plushie_siggraph07.pdf
+- EG Tutorial: [Computational Assemblies: Analysis, Design, and Fabrication](https://sutd-cgl.github.io/supp/Publication/papers/2022-EG-AssemblyTutorial.pdf)
