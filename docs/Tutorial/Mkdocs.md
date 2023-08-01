@@ -98,13 +98,10 @@ python -m mkdocs gh-deploy --config-file ../CS-Document/mkdocs.yml --remote-bran
 
 - `"git-revision-date-localized"` plugin is not installed
     - 安装下列包:  `pip install mkdocs-git-revision-date-localized-plugin`
-
 - LaTeX 无法换行：这是 MathJax 的 bug，现有的解决方法是在公式块中使用 `\displaylines{}`
-
 - 无序标题不支持多层嵌套：需要安装额外插件并启用
-
+    - P.S. 原生的无序标题不是不支持多层嵌套，而是嵌套的前提是第二级标题为 4 个空格而不是 typora 默认的 2 个空格
     - `pip install mdx_truly_sane_lists`
-  
     - 在 `mkdoc.yml` 的 `markdown_extensions` 添加 `mdx_truly_sane_lists` 
 
 
