@@ -4,9 +4,17 @@
 - labs link
     - [CGL SUTD](https://sutd-cgl.github.io/publication.html)
     - [EPFL](https://www.epfl.ch/labs/gcm/publications/)
+    - [NTHU CGV LAB](https://cgv.cs.nthu.edu.tw/home)
     - [HaoZhang](https://www.cs.sfu.ca/~haoz/papers_by_cat.html)
-
+    
 - EG Tutorial: [Computational Assemblies: Analysis, Design, and Fabrication](https://sutd-cgl.github.io/supp/Publication/papers/2022-EG-AssemblyTutorial.pdf)
+
+## Design Metric
+
+- Golden Ratio Arc
+- Black & White Abstraction (flat design: less is more)
+- skeuomorphic (拟物化)
+- 字体设计
 
 ## Image Abstraction
 
@@ -16,16 +24,21 @@
 - `[SIG11]` Abstraction of 2D Shapes in Terms of Parts
     - abstract: 对平面 2D 形状做抽象，减小形状的复杂程度
     - paper: http://graphics.stanford.edu/~niloy/research/abstraction/paper_docs/abstraction_siga_09.pdf
+- `[CVM17]` User-Guided Line Abstraction Using Coherence and Structure Analysis
+    - page: https://cgv.cs.nthu.edu.tw/projects/HCI/LineAbstraction
+
 - `[SIG18]`  Scale-aware Black-and-White Abstraction of 3D Shapes
     - abstract: Given a 3D shape, generate 2D B&W images 
     - project page: https://cgv.cs.nthu.edu.tw/projects/Shape_Analysis/BW_Abstraction
     - code: https://github.com/unlin/libbwabstraction
-    
+    - related work: [Artistic thresholding](https://dl.acm.org/doi/10.1145/1377980.1377990)
+
 
 ## Shape Deformation & Abstraction
 
 ### Deform Art
 
+- `[SIG09]` Abstraction of Man-Made Shapes
 - `[SIG16]` Legible Compact Calligrams
     - abstract: 对字体做变形，生成文字画
     - paper: https://www.cs.sfu.ca/~haoz/pubs/zou_sig16_calli.pdf
@@ -33,11 +46,14 @@
 ### Wire Art
 
 
-- `[SIGA18]` FlexMaps: Computational Design of Flat Flexible Shells for Shaping 3D Objects
+- `[SIGA18]` Multi-view Wire Art
+  
+    - page: https://cgv.cs.nthu.edu.tw/projects/recreational_graphics/MVWA
     
+- `[SIGA18]` FlexMaps: Computational Design of Flat Flexible Shells for Shaping 3D Objects
     - abstract: Given an input quad mesh, the FlexMaps framework first generates a coarse parametrized patch layout (a). Then, an optimization is performed to adjust the mechanical properties of a series of embedded spiral microstructures
     - page: https://vcg.isti.cnr.it/Publications/2018/MPIPMCB18/
-    
+
 - `[SIGA18]` Fabricable Eulerian Wires for 3D Shape Abstraction
 
     - abstract: compute a small number of machine fabricable wires
@@ -69,7 +85,7 @@
 
 
 - `[SIGA19]` Computational LEGO Technic Design
-    
+  
     - abstract: automatically compute LEGO Technic models from user input sketches
     - paper: https://arxiv.org/abs/2007.02245
     
