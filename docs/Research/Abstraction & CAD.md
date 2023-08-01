@@ -7,7 +7,6 @@
     - [NTHU CGV LAB](https://cgv.cs.nthu.edu.tw/home)
     - [HaoZhang](https://www.cs.sfu.ca/~haoz/papers_by_cat.html)
 
-
 ## Design Metric
 
 - Golden Ratio Arc
@@ -19,13 +18,11 @@
 
 - `[EG23]` Img2Logo: Generating Golden Ratio Logos from Images
     - page: https://cgv.cs.nthu.edu.tw/projects/img2Logo
-
 - `[SIG11]` Abstraction of 2D Shapes in Terms of Parts
     - abstract: 对平面 2D 形状做抽象，减小形状的复杂程度
     - paper: http://graphics.stanford.edu/~niloy/research/abstraction/paper_docs/abstraction_siga_09.pdf
 - `[CVM17]` User-Guided Line Abstraction Using Coherence and Structure Analysis
     - page: https://cgv.cs.nthu.edu.tw/projects/HCI/LineAbstraction
-
 - `[SIG18]`  Scale-aware Black-and-White Abstraction of 3D Shapes
     - abstract: Given a 3D shape, generate 2D B&W images 
     - project page: https://cgv.cs.nthu.edu.tw/projects/Shape_Analysis/BW_Abstraction
@@ -44,22 +41,15 @@
 
 ### Wire Art
 
-
 - `[SIGA18]` Multi-view Wire Art
-  
     - page: https://cgv.cs.nthu.edu.tw/projects/recreational_graphics/MVWA
-    
 - `[SIGA18]` FlexMaps: Computational Design of Flat Flexible Shells for Shaping 3D Objects
     - abstract: Given an input quad mesh, the FlexMaps framework first generates a coarse parametrized patch layout (a). Then, an optimization is performed to adjust the mechanical properties of a series of embedded spiral microstructures
     - page: https://vcg.isti.cnr.it/Publications/2018/MPIPMCB18/
-
 - `[SIGA18]` Fabricable Eulerian Wires for 3D Shape Abstraction
-
     - abstract: compute a small number of machine fabricable wires
     - page: http://gruvi.cs.sfu.ca/project/eulerianwires/
-
 - `[SIGA15]` WrapIt: Computer-Assisted Crafting of Wire Wrapped Jewelry
-
     - abstract: Present a computational design tool that addresses the two main challenges of creating 2D wirewrapped jewelry: decomposing an input drawing into a set of wires, and bending the wires to give them shape
     - page: http://www-sop.inria.fr/reves/Basilic/2015/ILB15/
 
@@ -74,10 +64,8 @@
     - abstract: a computational approach to design high-level interlocking puzzles
     - page: https://sutd-cgl.github.io/supp/Publication/projects/2022-SIGGRAPH-High-LevelPuzzle/index.html
     - code: https://github.com/Linsanity81/High-LevelPuzzle
-
 - `[SIGA19]` Design and Structural Optimization of Topological Interlocking Assemblies
     - page: https://kiki007.github.io/publication/topological_interlocking/
-
 - `[SIGA18]` DESIA: A General Framework for Designing Interlocking Assemblies
     - page: https://kiki007.github.io/publication/desia/
 - `[SIGA12]` Recursive Interlocking Puzzles
@@ -95,7 +83,6 @@
 
 ### LEGO Design
 
-
 - `[SIGA19]` Computational LEGO Technic Design
     - abstract: automatically compute LEGO Technic models from user input sketches
     - paper: https://arxiv.org/abs/2007.02245 
@@ -105,7 +92,6 @@
 
 
 ### Computational Assemblies
-
 
 - `[EG21]` State of the Art on Computational Design of Assemblies with Rigid Parts
     - abstract: SOTA report about assembly(装配体部件)
