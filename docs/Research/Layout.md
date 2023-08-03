@@ -3,7 +3,6 @@
 - `[ICCV19]` **LayoutVAE**: Stochastic Scene Layout Generation From a Label Set
     - model: VAE
     - task: 根据 label set, per label layouts in existing image 进行有条件生成
-
 - `[CVPR21]` **LayoutTransformer**: Layout generation and completion with self attention
     - model: transformer
     - task: completion
@@ -16,7 +15,6 @@
       - hierarchical mask sampling policy，一个改进了的 mask 方法，而不是直接应用 Transformer 的 mask
     - cons: 
       - 不能处理元素之间的关系
-
 - `[CVPR23]` **LayoutFormer++**: Conditional Graphic Layout Generation via Constraint Serialization and Decoding Space Restriction
     - model: transformer
     - condition: 根据 type, relationship, type & size 进行有条件生成, refinement, completion, 无条件生成
@@ -24,7 +22,6 @@
       - 灵活性和可控性强
       - A constraint serialization scheme which can handle diverse constrain
       - A sequence to sequence layout generation method
-
 - `[CVPR23]` **LayoutDM**: Discrete Diffusion Model for Controllable Layout Generation
     - model: diffusion
     - task: Category $\to$ Size+Position, Category+Size $\to$ Position, Completion, 无条件生成
