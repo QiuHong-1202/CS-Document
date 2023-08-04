@@ -1,5 +1,18 @@
 # Anaconda
 
+## 安装和镜像配置
+
+### 地址
+
+- [Anaconda 镜像](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
+- [Anaconda 下载](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/)
+- [MiniConda 下载](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/)
+
+### 注意事项
+
+- 尽量选择 MiniCoda
+- 安装时尽量安装到 `User` 目录 (无需管理员权限)
+
 ## Commands
 
 ### Conda 自身
