@@ -1,5 +1,9 @@
 # vcpkg
 
+## Notice
+
+- 在运行旧版本代码时，尽量不使用 vcpkg，因为 vcpkg 只会安装最新版本的包，想要安装自己想要的版本，最好的方式就是自己编译
+
 ## Install
 
 前置条件：
@@ -76,4 +80,3 @@ vcpkg integrate remove
 - scripts - 由 vcpkg 使用的脚本（CMake、PowerShell）。
 - toolsrc - vcpkg 和相关组件的 C++ 源代码。
 - triplets - 包含每个受支持目标平台（如 x86-windows 或 x64-uwp）的设置。
-    
