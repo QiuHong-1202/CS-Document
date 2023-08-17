@@ -3,6 +3,10 @@
 ## Notice
 
 - 在运行旧版本代码时，尽量不使用 vcpkg，因为 vcpkg 只会安装最新版本的包，想要安装自己想要的版本，最好的方式就是自己编译
+- 自行编译的步骤：
+    - 在 cmake 中 cofigure 和 generate 后 `build` 项目
+    - build `install`  （注意修改 cmake 中的 `install-prefix` 为自己想要的路径）
+
 
 ## Install
 
