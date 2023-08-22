@@ -27,3 +27,9 @@ set HTTP_PROXY=http://127.0.0.1:7890 && set HTTPS_PROXY=http://127.0.0.1:7890
 python -m mkdocs gh-deploy --config-file ../CS-Document/mkdocs.yml --remote-branch main
 ```
 
+- Create new Conda environment
+
+```
+conda create --name envname python=3.8
+```
+
