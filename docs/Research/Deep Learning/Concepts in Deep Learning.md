@@ -485,6 +485,31 @@ $$
 - 可以固定底部一些层的参数，不参与更新
     - 更强的正则
 
+## Logit
+
+- "Logit" 是一种用于表示概率的数学概念，通常在逻辑回归和分类问题中使用。
+
+- 在神经网络和深度学习中，"logit" 通常指的是**模型在输出层产生的未经过激活函数处理的原始数值**。
+
+- 在二元逻辑回归中，logit 可以表示为以下形式：
+
+
+$$
+\text{logit}(p) = \log \left( \frac{p}{1-p} \right)
+$$
+
+
+其中，$p$ 是事件发生的概率
+
+在多类别分类任务中，"logit" 是指模型对于每个类别的得分或原始输出，这些得分尚未经过 softmax 函数转换为概率分布。例如 "Semantic logits" 在语义分割任务中就是对每个语义类别的得分，表示模型认为某个像素属于各个类别的程度。
+
+在深度学习中，logit 通常是指模型在某个任务上的预测输出，这些输出还没有经过归一化或概率转换。为了将 logit 转换为概率，常常会使用 `softmax` 函数，该函数可以将一组数值转换为概率分布，使得所有概率值都在 $0$ 到 $1$ 之间且总和为 $1$。
+
+> - [如何理解深度学习源码里经常出现的logits？](https://www.zhihu.com/question/60751553)
+> - [What does Logits in machine learning mean?](https://datascience.stackexchange.com/questions/31041/what-does-logits-in-machine-learning-mean)
+
+
+
 # Concept Links
 
 - [nn.Module 类与前向传播函数 forward 的理解](https://www.cnblogs.com/luckyplj/p/13378293.html)
