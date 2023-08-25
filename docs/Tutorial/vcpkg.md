@@ -7,6 +7,7 @@
     - 在 cmake 中 cofigure 和 generate 后 `build` 项目
     - build `install`  （注意修改 cmake 中的 `install-prefix` 为自己想要的路径）
 
+- [Visual Studio版本号、MSVC版本、工具集版本号](https://blog.csdn.net/sanqima/article/details/117849324)
 
 ## Install
 
@@ -84,3 +85,4 @@ vcpkg integrate remove
 - scripts - 由 vcpkg 使用的脚本（CMake、PowerShell）。
 - toolsrc - vcpkg 和相关组件的 C++ 源代码。
 - triplets - 包含每个受支持目标平台（如 x86-windows 或 x64-uwp）的设置。
+
