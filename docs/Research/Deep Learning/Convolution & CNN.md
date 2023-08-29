@@ -79,12 +79,15 @@ $$
 ![../_images/conv-multi-in.svg](https://zh.d2l.ai/_images/conv-multi-in.svg)
 
 
+
 $$
 \begin{aligned}
 & (1 \times 1+2 \times 2+4 \times 3+5 \times 4) \\
 & +(0 \times 0+1 \times 1+3 \times 2+4 \times 3)=56
 \end{aligned}
 $$
+
+
 
 
 - 输入 $\mathbf{X}: c_i \times n_h \times n_w$
@@ -99,7 +102,7 @@ $$
 
 ### 多个输出通道
 
-- 无论有多少输入通道，到目前为止我们只用到单输出通
+- 无论有多少输入通道，到目前为止我们只用到单输出通道
 - 我们可以有多个三维卷积核, 每个核生成一个输出通道
 - 输入 $\mathbf{X}: c_i \times n_h \times n_w$
 - 核 $\mathbf{W}: c_o \times c_i \times k_h \times k_w$
@@ -142,9 +145,11 @@ $k_h=k_w=1$ 是一个受欢迎的选择。它不识别空间模式, 只是融合
 ![../_images/pooling.svg](https://zh.d2l.ai/_images/pooling.svg)
 
 
+
 $$
 \max (0,1,3,4)=4
 $$
+
 
 
 ### 平均池化层
@@ -170,3 +175,123 @@ $$
 
 [^]: 从LeNet（左）到AlexNet（右）
 
+## VGG
+
+- 使用块的网络，对 AlexNet 的改进是去除了一些不规则的部分，改为用块来连接（更大更深的 AlexNet，通过重复的 VGG 块）
+
+![../_images/vgg.svg](https://zh.d2l.ai/_images/vgg.svg)
+
+- VGG 的重要思想
+    - 使用可重复的块来构建深度学习网络（构建一个好的块，累加多个块就可以得到一个好的网络）
+    - 网络可以使用不同的配置（低配网络、高配网络）
+
+## 网络中的网络 NiN
+
+- 卷积层需要较少的参数
+
+$$
+c_i \times c_o \times k^2
+$$
+- 但卷积层后的第一个全连接层 的参数
+    - LeNet $16 \times 5 \times 5 \times 120=48 \mathrm{k}$
+    - AlexNet $256 \times 5 \times 5 \times 4096=26 \mathrm{M}$
+    - VGG $512 \times 7 \times 7 \times 4096=102 \mathrm{M}$
+
+- 参数太多的问题
+    - 内存占用多
+    - 计算带宽占用大，访问内存耗时长
+    - 容易过拟合
+
+- NiN 的思想：完全不需要卷积层
+
+### NiN 块
+
+- 一个卷积层后跟两个全连接层
+    - 步幅 1，无填充，输出形状和卷积层输出一样
+    - 起到全连接层的作用
+
+![image-20230829095740832](./assets/image-20230829095740832.png)
+
+- 无全连接层
+- 交替使用 NiN 块和步幅为 2 的最大池化层
+    - 逐步减少高宽和增大通道数
+- 最后使用平均池化层得到输出
+    - 输入通道数是类别数
+
+### Summary
+
+- NiN 块使用卷积层加两个 1x1 卷积层
+    - 后者对每个像素增加了非线性性
+
+- NiN 使用全局平均池化层来替代 VGG 和 AlexNet 中的全连接层
+    - 这样不容易过拟合，并且有更少的参数个数
+
+## 含并行连结的网络 GoogLeNet
+
+- 第一个超过 100 层的 CNN
+- 上述网络都涉及到卷积块的超参数选择，如何选择最好的超参数
+    - 使用 Inception 块：小学生才做选择题，我全都要
+
+### Inception 块
+
+- Inception 块有 4 个路径，从不同的层面抽取信息，然后在输出通道合并
+- 和单 3x3 或 5x5 卷积层比，Inception 块有更少的参数个数和计算复杂度
+
+![../_images/inception.svg](https://zh.d2l.ai/_images/inception.svg)
+
+### Architecture
+
+![../_images/inception-full.svg](https://zh.d2l.ai/_images/inception-full.svg)
+
+
+
+## 批量归一化 Batch Normalization
+
+- 损失出现在最后，后面的层训练较快
+- 数据在最底部
+    - 底部的层训练较慢
+    - 底部的层一产生变化，所以都得跟着变
+    - 最后的那些层需要学习多次
+    - 导致收敛变慢
+
+- 需要在学习底部层的时候避免顶部的重复训练
+
+### Method
+
+- 固定小批量中的均值和方差
+
+
+$$
+\mu_B=\frac{1}{|B|} \sum_{i \in B} x_i \text { and } \sigma_B^2=\frac{1}{|B|} \sum_{i \in B}\left(x_i-\mu_B\right)^2+\epsilon
+$$
+
+
+然后再做额外的调整（$\gamma, \beta$ 是可学习的参数）
+
+
+$$
+x_{i+1}=\gamma \frac{x_i-\mu_B}{\sigma_B}+\beta
+$$
+
+
+### Summary
+
+- 批量归一化固定小批量中的均值和方差，然后学习出合适的偏移和缩放
+- 可以加速收敛速度（可以使用较大的学习率），但一般都不改变模型精度 
+
+## ResNet
+
+- 加更多的层不总是能改进精度
+
+![../_images/functionclasses.svg](https://zh-v2.d2l.ai/_images/functionclasses.svg)
+
+### 残差块
+
+- 串联一个层改变函数类，我们希望扩大函数类
+- 残差块加入快速通道来得到 $f(x) = x + g(x)$ 的结构
+
+![../_images/residual-block.svg](https://zh-v2.d2l.ai/_images/residual-block.svg)
+
+### ResNet-18
+
+![../_images/resnet18.svg](https://zh-v2.d2l.ai/_images/resnet18.svg)
