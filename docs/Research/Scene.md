@@ -1,4 +1,4 @@
-# Scene Reconstruction
+# Scene
 
 !!! note
 
