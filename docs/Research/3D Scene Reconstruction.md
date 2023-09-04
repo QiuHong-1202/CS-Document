@@ -1,4 +1,4 @@
-# Colmap
+# 3D Scene Reconstruction
 
 ## Multi View Stereo
 
@@ -74,7 +74,7 @@ BA问题通常可以通过LM算法进行求解。但是，当SfM面对网络图�
 
 > - 位姿：拍摄图像的相机在三维空间中d
 
-## Algorithm Detail
+## Colmap Algorithm Detail
 
 ### Scale-invariant feature transform (SIFT)
 
