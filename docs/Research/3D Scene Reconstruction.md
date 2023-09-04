@@ -115,6 +115,6 @@ BA问题通常可以通过LM算法进行求解。但是，当SfM面对网络图�
 
 
 
-## Reference Links
+## References
 
 - [三维重建系列 COLMAP: Structure-from-Motion Revisited](https://vincentqin.tech/posts/colmap/)
