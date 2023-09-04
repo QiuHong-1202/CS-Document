@@ -8,7 +8,7 @@
 
 ## Principal of Indoor Scene Network Design
 
-> From the talk of Richard in 2023/9/3
+> From the talk of Richard in 2023/9/3 - 2023/9/4
 
 ### Description
 
@@ -19,17 +19,52 @@
 
 ### 3C Principal
 
-- consistency
+- **consistency**
+    - should be considered frist
     - weak prior: same class = same function
     - e.g. cycle consistency (for unpaired domain translation)
     - e.g. VAE (predictable & compressibility $\to$ need redundancy [*symmetry*] )
         - bottle neck layer in neural network: force to compress
-- compactness
+- **compactness**
     - model representation
-- continuity
+- **continuity**
     - linkage between the scene (bridge gap)
 
+## Scene Hierarchy
 
+- symmetry $\to$ construct graph $\to$ tree
+    - rotation
+    - reflection
+- connectivity
+
+### Differences Between Scene & Shape Hierarchy 
+
+- scene is difficult to align 
+- scene has much more variations
+- real scenes are much ***messy***
+    - note that: messy $\neq$ random
+    - why messy: human action & activity (function of objects & co-occurrence of objects)
+- sub-scene indicate functional units
+
+### Problems in Complex Scene & Layouts
+
+- Problem #1: compare complex scene & layout 
+
+    - In scene we need focal points (= subscenes)
+
+    - Find focal points (can be regarded as attention machoism in NLP)
+        - context will make it easier
+        - clustering algorithm [sig 2014]
+        - find frequent & discriminate parts
+        - do organize or retrieval
+
+- Problem #2: action-driven scene evolution
+    - should consider not only see/observe
+    - should consider functionality & human action
+    - scene understanding = inference of human action (annotated photo $\to$ action model $\to$ action graph)
+- Problem #3: text-driven 3D scene synthesis
+    - using scene proxy to guide
+- Problem #4: generative model of 3D scene structure
 
 ## Related Algorithm
 
@@ -70,5 +105,17 @@ $$
 
 ## References
 
+### Web Links
+
 - [Camera Sensor Size](https://designreviews.com/digital-camera-sensor-size-chart/)
 - [体渲染 (Volume Rendering)](https://zhuanlan.zhihu.com/p/595117334)
+
+### Learning on Point Cloud
+
+- PointNet
+    - [论文解读](https://zhuanlan.zhihu.com/p/264627148)
+- PointNet++
+    - [论文解读](https://zhuanlan.zhihu.com/p/266324173)
+- Dynamic Graph CNN
+    - [论文解读](https://zhuanlan.zhihu.com/p/267895014)
+
