@@ -1,32 +1,39 @@
-# Scene
+# 3D Scene Analysis
 
 !!! note
 
     start on: Aug 23, 2023
 
-## Multi View Stereo
 
-- Current MVS pipeline for 3D reconstruction (2 stages)
-    - Estimating the **depth map** for each image based on MVS
-    - Performing **depth fusion** to obtain the final reconstruction result
 
-> MVS downstream application
->
-> - novel view synthesis
+## Principal of Indoor Scene Network Design
 
-## Incremental & global SFM
+> From the talk of Richard in 2023/9/3
 
-- **Incremental SFM**
-    - 首先从一张或几张图像中恢复出初始的三维结构和摄像机参数。然后，每次引入一张新图像时，系统会将该图像与先前已恢复的模型进行比较，计算新图像中特征点与已知三维点的对应关系，并使用这些对应关系来优化摄像机参数和三维点的位置。这个过程不断迭代，每次处理一张新图像，逐步完善场景模型。
-    - Pros: 适用于处理大规模图像序列、能够实时地更新模型
-    - Cons: 每次迭代只考虑局部信息，可能会导致积累误差
+### Description
 
-- **Global SFM**
-    - 同时考虑整个图像序列，系统会在整个图像序列中寻找共同的特征点并且同时优化所有的摄像机参数和三维点位置，以最大程度地减小整个场景模型的重投影误差。这种方法通常使用大规模非线性优化算法来解决
-    - Pros: 可以更准确地建立整个场景的三维模型，因为它考虑了所有的图像和特征点信息，从而减小了累积误差的影响
-    - Cons: 需要处理整个图像序列，全局式结构光通常计算复杂度较高，可能不适用于实时应用或大规模场景
+- function description
+- structural description
+    - object parts
+    - part relations
 
-## Signed distance field
+### 3C Principal
+
+- consistency
+    - weak prior: same class = same function
+    - e.g. cycle consistency (for unpaired domain translation)
+    - e.g. VAE (predictable & compressibility $\to$ need redundancy [*symmetry*] )
+        - bottle neck layer in neural network: force to compress
+- compactness
+    - model representation
+- continuity
+    - linkage between the scene (bridge gap)
+
+
+
+## Related Algorithm
+
+### Signed distance field
 
 - signed distance from the edge of a shape
     - inside shape: negative
@@ -35,7 +42,7 @@
 
 ![image-20230824152525493](./assets/image-20230824152525493.png)
 
-## Marching Cube
+### Marching Cube
 
 > - [游戏编程挑战：生成无边的水下世界 体绘制算法 | Coding Adventure: Marching Cubes](https://www.bilibili.com/video/BV1yJ411r73v/)
 
