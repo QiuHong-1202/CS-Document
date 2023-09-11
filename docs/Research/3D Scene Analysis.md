@@ -68,6 +68,17 @@
 
 ## Related Algorithm
 
+### Dynamic Graph CNN
+
+- Related Work
+    - PointNet: https://zhuanlan.zhihu.com/p/264627148
+    - PointNet++: https://zhuanlan.zhihu.com/p/266324173
+- 论文解读
+    - https://zhuanlan.zhihu.com/p/267895014
+    - https://blog.csdn.net/weixin_39373480/article/details/88724518
+    - https://blog.csdn.net/yuanmiyu6522/article/details/125309097
+    - https://blog.csdn.net/hongbin_xu/article/details/85258278
+
 ### Signed distance field
 
 - signed distance from the edge of a shape
@@ -82,6 +93,7 @@
 > - [游戏编程挑战：生成无边的水下世界 体绘制算法 | Coding Adventure: Marching Cubes](https://www.bilibili.com/video/BV1yJ411r73v/)
 
 使用 3D 空间中的一个点作为输入， 随后返回一个值
+
 
 
 $$
@@ -110,12 +122,5 @@ $$
 - [Camera Sensor Size](https://designreviews.com/digital-camera-sensor-size-chart/)
 - [体渲染 (Volume Rendering)](https://zhuanlan.zhihu.com/p/595117334)
 
-### Learning on Point Cloud
 
-- PointNet
-    - [论文解读](https://zhuanlan.zhihu.com/p/264627148)
-- PointNet++
-    - [论文解读](https://zhuanlan.zhihu.com/p/266324173)
-- Dynamic Graph CNN
-    - [论文解读](https://zhuanlan.zhihu.com/p/267895014)
 
