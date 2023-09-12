@@ -66,7 +66,14 @@
     - using scene proxy to guide
 - Problem #4: generative model of 3D scene structure
 
-## Related Algorithm
+
+
+## Related Neural Network
+
+### Graph Neural Networks
+
+- Tutorial
+    - [图神经网络（Graph Neural Networks，GNN）综述](https://zhuanlan.zhihu.com/p/75307407)
 
 ### Dynamic Graph CNN
 
@@ -78,6 +85,8 @@
     - https://blog.csdn.net/weixin_39373480/article/details/88724518
     - https://blog.csdn.net/yuanmiyu6522/article/details/125309097
     - https://blog.csdn.net/hongbin_xu/article/details/85258278
+
+## Related Algorithm
 
 ### Signed distance field
 
@@ -99,6 +108,7 @@
 $$
 f(x,y,z) \to v
 $$
+
 
 
 假设在空间中的某个区域内，我们可以使用函数 $f$ 等间距的采样一些点
