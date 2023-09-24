@@ -9,6 +9,8 @@
 
 - [Visual Studio版本号、MSVC版本、工具集版本号](https://blog.csdn.net/sanqima/article/details/117849324)
 
+- [Visual Studio Old Version](https://learn.microsoft.com/zh-cn/visualstudio/releases/2019/release-note)
+
 ## Install
 
 前置条件：
