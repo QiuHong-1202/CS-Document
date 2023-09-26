@@ -1,10 +1,84 @@
 # Point Cloud Feature Extraction
 
+
+
+## Concept Explanation
+
+- 点云的排列不变性（permutation invariance & Invariance under transformations）: As a geometric object, the learned representation of the point set should be invariant to certain transformations. For example, rotating and translating points all together should not modify the global point cloud category nor the segmentation of the points
+
+
+
 ## PointNet
+
+### Architecture
+
+![image-20230926094556306](./assets/image-20230926094556306.png)
+
+### Symmetry Function for Unordered Input (max pooling layer)
+
+- 为了使模型对输入排列不敏感，有三种策略
+    - 将输入排序为规范顺序（但对于高维空间，不存在一种普遍意义上稳定的排序，因此排序并不完全解决了输入顺序的问题）
+    - 将输入视为序列以训练 RNN，但通过各种排列来扩充训练数据 （RNN 很难处理好成千上万长度的这种输入元素）
+    - 使用简单的对称函数来汇总每个点的信息（PointNet采用的策略）
+
+
+
+对称函数的设计如下：
+
+
+$$
+f\left(\left\{x_1, \ldots, x_n\right\}\right) \approx g\left(h\left(x_1\right), \ldots, h\left(x_n\right)\right)
+$$
+
+
+$f$ 为目标函数，$g$ 为近似 $f$ 的函数（期望设计的对称函数），对于点云中的每个点 $x_1, x_2, ...x_n$ ，使用函数 $h$ 处理后送给对称函数 $g$ ，以实现排列不变
+
+
+
+### Local and Global Information Aggregation
+
+- 需要 point-wise feature 
+- 直接拼接全局特征和局部特征
+
+
+
+### Joint Alignment Network
+
+- 用于实现网络对于仿射变换、刚体变换等变换的无关性
+- 一种直接的思路：将所有的输入点集对齐到一个统一的点集空间 (Normalization)
+    - 使点云数据在处理之前具有一定的一致性，以便更容易进行特征提取、分类、分割或其他分析任务
+    - 确保输入的几何结构或语义信息不受刚性变换（如平移、旋转）的影响
+- PointNet采用的策略：直接预测一个变换矩阵（$3\times 3$）来处理输入点的坐标
+    - 使用 T-net 来预测仿射变换矩阵，然后将此变换应用于输入点的坐标
+    - T-net: point independent feature extraction, max pooling and MLP
+
+
+
+![image-20230926160156894](./assets/image-20230926160156894.png)
+
+
 
 ## PointNet++
 
+- PointNet 的缺陷：只使用了MLP和max pooling，没有能力捕获局部结构，因此在细节处理和泛化到复杂场景上能力有限
+- PointNet 的几个问题
+    - Point-wise MLP：仅仅是对每个点表征，对局部结构信息整合能力太弱 $\to$ **PointNet++的改进：sampling 和 grouping 整合局部邻域**
+    - Global feature 直接由 max pooling 获得：无论是对分类还是对分割任务，都会造成巨大的信息损失 $\to$ **PointNet++的改进：hierarchical feature learning framework，通过多个 set abstraction 逐级降采样，获得不同规模不同层次的 local-global feature**
+    - 分割任务的全局特征 global feature 是直接复制然后与 local feature 拼接：生成 discriminative feature 的能力有限 $\to$ **PointNet++的改进：分割任务设计了 encoder-decoder 结构，先降采样再上采样，使用 skip connection 将对应层的local-global feature 拼接**
+
+
+
+### Architecture
+
+![image-20230926161550348](./assets/image-20230926161550348.png)
+
+
+
 ## Dynamic Graph CNN
+
+### Architecture
+
+![image-20230926145300080](./assets/image-20230926145300080.png)
 
 - 假设一个 $F$ 维点云有 $n$ 个点，定义为: $X=x_1, \ldots, x_n \in R^F$ 
     - 最简单地情况下， $F=3$ ，三维坐标。
@@ -24,9 +98,12 @@
 - 最后在 EdgeConv 操作上添加一个通道级的对称聚合操作 $\square$ 
 
 
+
 $$
 x_i^{\prime}=\square_{j:(i, j) \in \epsilon} h_{\Theta}\left(x_i, x_j\right)
 $$
+
+
 
 
 - 关于公式中的 $h$ 和 $\square$ 有四种可能的选择:
@@ -35,7 +112,6 @@ $$
 2. $h_{\Theta}\left(x_i, x_j\right)=h_{\Theta}\left(x_i\right)$ ，只提取全局形状信息，而忽视了局部领域结构。这类网络实际上就是 PointNet，因此 PointNet 中可以说 使用了特殊的 EdgeConv 模块
 3. $h_{\Theta}\left(x_i, x_j\right)=h_{\Theta}\left(x_j-x_i\right)$ 。这种方式只对局部信息进行编码，在本质上就是将原始点云看做一系列小块的集合，丢失了原始 的全局形状结构信息
 4. 文中采用的， $h_{\Theta}\left(x_i, x_j\right)=h_{\Theta}\left(x_i, x_j-x_i\right)$ ，这样的结构同时结合了全局形状信息以及局部领域信息
-
 
 
 
