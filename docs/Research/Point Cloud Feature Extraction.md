@@ -60,6 +60,8 @@ $f$ 为目标函数，$g$ 为近似 $f$ 的函数（期望设计的对称函数�
 
 ## PointNet++
 
+### Background
+
 - PointNet 的缺陷：只使用了MLP和max pooling，没有能力捕获局部结构，因此在细节处理和泛化到复杂场景上能力有限
 - PointNet 的几个问题
     - Point-wise MLP：仅仅是对每个点表征，对局部结构信息整合能力太弱 $\to$ **PointNet++的改进：sampling 和 grouping 整合局部邻域**
@@ -75,6 +77,16 @@ $f$ 为目标函数，$g$ 为近似 $f$ 的函数（期望设计的对称函数�
 
 
 ## Dynamic Graph CNN
+
+### Background
+
+对于点云特征学习，有以下两种常用方法
+
+- 将点云转换为 volumetric representation（体表示），也就是3D网格，随后便可以采用 3D 的 CNN 网络来提取特征。
+    - 然而，这种方法会造成 quantization artifacts，和额外的内存占用，导致难以提取高分辨率或者细粒度特征
+- 直接将不规则的点云作为输入的深度网络，即 PointNet 系的网络
+    - PointNet，通过独立地处理每个点，能实现置换不变性（permutation invariance）。随后使用一个对称函数（symmetric function）来聚合特征。之后，一些基于PointNet的改进网络会考虑点的局部特征，而不是分开处理。这样可以让网络提取到局部特征，提高模型的性能。
+    - 然而这类算法，在处理局部区域的点的时候为了保证置换不变性，而导致过于独立。这样会忽视点之间的几何相关信息，导致**丢失一部分局部特征信息**
 
 ### Architecture
 
