@@ -1,5 +1,7 @@
 # Pytorch
 
+## Problems
+
 ### 使用所有 CPU 核心
 
 - 默认使用一半核心运行
@@ -98,3 +100,7 @@ print(x) # prints the truncated tensor
 ### 训练时 loss 尖峰
 
 保持总数据量能够整除 batch_size 可以避免这一情况，在 batch 较小时，随机性增大，导致 loss 增大
+
+## Links
+
+- 为什么 Cross Entropy 的计算结果不为 0：[Cross Entropy in PyTorch](https://stackoverflow.com/questions/49390842/cross-entropy-in-pytorch)
