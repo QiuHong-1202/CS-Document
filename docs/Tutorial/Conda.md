@@ -1,4 +1,4 @@
-# Anaconda
+# Conda
 
 ## 安装和镜像配置
 
@@ -14,6 +14,32 @@
 - 安装时尽量安装到 `User` 目录 (无需管理员权限)
 
 ## Commands
+
+### 缓存清理
+
+- Conda
+
+```
+# 删除没有用的包
+conda clean -p
+# 删除tar打包
+conda clean -t
+# 删除无用的包和缓存
+conda clean --all
+```
+
+- PIP (Linux)
+
+```
+rm -rf ~/.cache/pip
+```
+
+- PIP (Windows)
+
+```
+# 删除下面的文件夹
+C:\Users\username\AppData\Local\pip\cache
+```
 
 ### Conda 自身
 
