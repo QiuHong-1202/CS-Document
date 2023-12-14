@@ -13,6 +13,45 @@
 - 尽量选择 MiniCoda
 - 安装时尽量安装到 `User` 目录 (无需管理员权限)
 
+### Pytorch v1.8.2 with LTS support (Python <= 3.8)
+
+```
+# CUDA 10.2
+# NOTE: PyTorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch-lts
+
+# CUDA 11.1 (Linux)
+# NOTE: 'nvidia' channel is required for cudatoolkit 11.1 <br> <b>NOTE:</b> Pytorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c nvidia
+
+# CUDA 11.1 (Windows)
+# 'conda-forge' channel is required for cudatoolkit 11.1 <br> <b>NOTE:</b> Pytorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c conda-forge
+
+# CPU Only
+# Pytorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cpuonly -c pytorch-lts
+
+# ROCM5.x
+
+Not supported in LTS.
+
+
+
+# CUDA 10.2
+pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu102
+
+# CUDA 11.1
+pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu111
+
+# CPU Only
+pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu
+
+# ROCM5.x
+
+Not supported in LTS.
+```
+
 ## Commands
 
 ### 缓存清理
